@@ -6,35 +6,52 @@ import Image from "next/image";
 import { donors } from "@/data/donors";
 
 export function DonorPartners() {
+  const midpoint = Math.ceil(donors.length / 2);
+  const donorRows = [donors.slice(0, midpoint), donors.slice(midpoint)];
+
   return (
-    <section className="border-t border-[#e7eceb] bg-white px-5 py-10 md:py-12">
+    <section className="overflow-hidden border-y border-[#e7eceb] bg-[linear-gradient(180deg,#ffffff_0%,#fffaf1_48%,#ffffff_100%)] py-12 md:py-14">
       <div className="mx-auto max-w-6xl">
-        <div className="text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-6% 0px" }}
+          transition={{ duration: 0.45 }}
+          className="px-5 text-center"
+        >
           <p className="font-heading text-3xl font-semibold text-[var(--ches-blue)] md:text-4xl">Trusted by Leading Organizations</p>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-[var(--ches-muted)]">
             For over three decades, CHES has worked alongside respected organizations committed to improving children&apos;s lives.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-8 grid grid-cols-2 items-center gap-x-6 gap-y-7 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {donors.map((donor, index) => (
-            <motion.div
-              key={donor.logo}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-6% 0px" }}
-              transition={{ duration: 0.25, delay: Math.min(index * 0.02, 0.24) }}
-              className="group flex h-16 items-center justify-center px-2"
+        <div className="relative mt-9 space-y-4">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white via-white/85 to-transparent md:w-28" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white via-white/85 to-transparent md:w-28" />
+
+          {donorRows.map((row, rowIndex) => (
+            <div
+              key={rowIndex === 0 ? "donor-row-forward" : "donor-row-reverse"}
+              className="donor-marquee"
+              aria-label={rowIndex === 0 ? "Donor logos row one" : "Donor logos row two"}
             >
-              <Image
-                src={donor.logo}
-                alt={`${donor.name} logo`}
-                width={180}
-                height={80}
-                loading="lazy"
-                className="max-h-14 w-auto max-w-full object-contain opacity-70 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
-              />
-            </motion.div>
+              <div className={`donor-marquee-track ${rowIndex === 1 ? "donor-marquee-track-reverse" : ""}`}>
+                {[0, 1].map((copyIndex) =>
+                  row.map((donor) => (
+                    <div key={`${donor.logo}-${copyIndex}`} className="group donor-logo-card" aria-hidden={copyIndex === 1}>
+                      <Image
+                        src={donor.logo}
+                        alt={copyIndex === 0 ? `${donor.name} logo` : ""}
+                        width={190}
+                        height={86}
+                        loading="lazy"
+                        className="max-h-14 w-auto max-w-[150px] object-contain opacity-68 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 md:max-w-[170px]"
+                      />
+                    </div>
+                  )),
+                )}
+              </div>
+            </div>
           ))}
         </div>
       </div>

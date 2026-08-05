@@ -1,22 +1,18 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Heart, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 import { navItems, site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { scrollY } = useScroll();
-
-  useEffect(() => {
-    return scrollY.on("change", (latest) => setScrolled(latest > 24));
-  }, [scrollY]);
+  const pathname = usePathname();
 
   return (
     <header
@@ -36,23 +32,28 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "text-sm font-medium transition hover:text-[var(--ches-orange)]",
-                scrolled ? "text-[var(--ches-ink)]/78" : "text-[var(--ches-ink)]/78",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const active = pathname === item.href;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "relative py-2 text-sm font-medium transition hover:text-[var(--ches-orange)]",
+                  active ? "text-[var(--ches-orange)]" : "text-[var(--ches-ink)]/78",
+                )}
+              >
+                {item.label}
+                {active ? <span className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-[var(--ches-orange)]" /> : null}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="hidden lg:block">
           <Link href="/donate" className="primary-cta h-12 px-6">
-            Donate Now
+            Donate Now <Heart className="size-4 fill-current" />
           </Link>
         </div>
 
@@ -85,14 +86,17 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-4 py-3 font-heading text-xl font-bold text-[var(--ches-blue)] transition hover:bg-[#f2f8f8]"
+                  className={cn(
+                    "rounded-lg px-4 py-3 font-heading text-xl font-bold transition hover:bg-[#f2f8f8]",
+                    pathname === item.href ? "text-[var(--ches-orange)]" : "text-[var(--ches-blue)]",
+                  )}
                 >
                   {item.label}
                 </Link>
               ))}
             </div>
             <Link href="/donate" onClick={() => setOpen(false)} className="primary-cta w-full">
-              Donate Now
+              Donate Now <Heart className="size-4 fill-current" />
             </Link>
           </motion.div>
         ) : null}

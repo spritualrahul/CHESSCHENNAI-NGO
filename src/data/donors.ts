@@ -27,6 +27,7 @@ export const donors: DonorLogo[] = [
   { name: "ATMA Trust", logo: "/Assets/Donor logo/ATMA.jpg" },
   { name: "Bill & Melinda Gates Foundation", logo: "/Assets/Donor logo/Bill & Melinda Gates Foundation.png" },
   { name: "IL&FS", logo: "/Assets/Donor logo/ILFS.png" },
+  { name: "Emirates", logo: "/Assets/Donor logo/emeraites.jpeg" },
   { name: "TAI VHS", logo: "/Assets/Donor logo/TAI-VHS.jpg" },
   { name: "NACO", logo: "/Assets/Donor logo/NACO.png" },
   { name: "TANSACS", logo: "/Assets/Donor logo/TANSACS.png" },
