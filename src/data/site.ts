@@ -244,7 +244,7 @@ export const faqs = [
 ];
 
 export const donationDetails = {
-  upiId: "ches@upi",
+  upiId: "9444077177@indianbk",
   chequePayableTo: "CHES",
   domestic: {
     accountName: "CHES",
