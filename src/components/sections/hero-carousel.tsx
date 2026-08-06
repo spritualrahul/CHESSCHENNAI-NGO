@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight, Heart, ShieldCheck, UsersRound, GraduationCap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +14,18 @@ const heroStats = [
   { icon: GraduationCap, value: "Health, Education &", label: "Child Protection" },
   { icon: ShieldCheck, value: "Since 1994", label: "Trusted NGO" },
 ];
+
+const slideVariants: Variants = {
+  enter: (direction: number) => ({ opacity: 0.9, x: `${direction * 100}%` }),
+  center: { opacity: 1, x: "0%" },
+  exit: (direction: number) => ({ opacity: 0.9, x: `${direction * -100}%` }),
+};
+
+const reducedSlideVariants: Variants = {
+  enter: { opacity: 0 },
+  center: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 export function HeroCarousel() {
   const [active, setActive] = useState(0);
@@ -38,9 +50,10 @@ export function HeroCarousel() {
             key={slide.src}
             className="absolute inset-0"
             custom={direction}
-            initial={prefersReducedMotion ? { opacity: 0 } : (slideDirection: number) => ({ opacity: 0.9, x: `${slideDirection * 100}%` })}
-            animate={{ opacity: 1, x: "0%" }}
-            exit={prefersReducedMotion ? { opacity: 0 } : (slideDirection: number) => ({ opacity: 0.9, x: `${slideDirection * -100}%` })}
+            variants={prefersReducedMotion ? reducedSlideVariants : slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
             transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
           >
             <motion.div
