@@ -95,7 +95,7 @@ export const originStory = [
   {
     label: "03",
     title: "The Shelter Home",
-    text: "CHES’s first initiative, the Shelter Home, was established in 1984 for AIDS orphans. At the time, Dr. Manorama was working at the Institute of Child Health and Hospital for Children, Egmore, where two young children, Krishnaveni (S) and Ravi (A), were being treated for HIV and Hepatitis B. After discharge, they had nowhere to go.",
+    text: "CHES’s first initiative, the Shelter Home, was established in 1994 for AIDS orphans. At the time, Dr. Manorama was working at the Institute of Child Health and Hospital for Children, Egmore, where two young children, Krishnaveni (S) and Ravi (A), were being treated for HIV and Hepatitis B. After discharge, they had nowhere to go.",
   },
   {
     label: "04",

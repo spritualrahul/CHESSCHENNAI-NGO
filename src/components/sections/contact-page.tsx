@@ -37,8 +37,8 @@ export function ContactPageContent() {
   const [activeContact, setActiveContact] = useState<string | null>(null);
 
   return (
-    <main className="contact-page overflow-hidden bg-[#fffdf9] text-[#102433]">
-      <section className="contact-hero relative isolate overflow-hidden pt-20 text-white">
+    <main className="contact-page overflow-hidden bg-[#fffdf8] text-[#2f261b]">
+      <section className="contact-hero relative isolate overflow-hidden bg-[var(--ches-sky)] pt-20 text-[#2f261b]">
         <Image
           src="/placeholders/contact-hero-fresh.png"
           alt="Smiling children gathered at a CHES community learning space"
@@ -47,7 +47,7 @@ export function ContactPageContent() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,41,57,.96)_0%,rgba(0,44,61,.86)_29%,rgba(0,44,61,.2)_62%,rgba(0,0,0,.03)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(242,249,252,.98)_0%,rgba(242,249,252,.94)_34%,rgba(242,249,252,.58)_66%,rgba(242,249,252,.1)_100%)]" />
         <div className="relative mx-auto flex min-h-[590px] max-w-7xl items-center px-5 py-16">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }} className="max-w-[600px]">
             <div className="mb-4 flex items-center gap-3 text-[var(--ches-orange)]">
@@ -55,10 +55,10 @@ export function ContactPageContent() {
               <p className="font-script text-3xl font-semibold">We&apos;re here for you</p>
             </div>
             <h1 className="font-heading text-5xl font-semibold leading-[.98] md:text-[4.6rem]">Let&apos;s Connect<br />&amp; Create Change</h1>
-            <p className="mt-6 max-w-[440px] text-base leading-7 text-white/90 md:text-lg">Whether you want to collaborate, volunteer, donate or learn more about our work, we would love to hear from you.</p>
+            <p className="mt-6 max-w-[440px] text-base leading-7 text-[#463d31]/82 md:text-lg">Whether you want to collaborate, volunteer, donate or learn more about our work, we would love to hear from you.</p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
-              <Link href="/donate" className="primary-cta h-12 bg-[#f17616] px-6 hover:bg-[#df5f0c]">Donate Now <Heart className="size-4 fill-current" /></Link>
-              <Link href="/projects" className="inline-flex h-12 items-center gap-3 rounded-full px-3 text-sm font-bold text-white transition hover:text-[var(--ches-orange)]">
+              <Link href="/donate" className="primary-cta h-12 px-6">Donate Now <Heart className="size-4 fill-current" /></Link>
+              <Link href="/projects" className="inline-flex h-12 items-center gap-3 rounded-full px-3 text-sm font-bold text-[#4a3a26] transition hover:text-[var(--ches-orange)]">
                 <span className="grid size-9 place-items-center rounded-full border border-[var(--ches-orange)] text-[var(--ches-orange)]"><Sparkles className="size-4" /></span>
                 See Our Impact
               </Link>
@@ -68,41 +68,41 @@ export function ContactPageContent() {
       </section>
 
       <section className="relative z-10 mx-auto -mt-12 max-w-[1180px] px-5 pb-14 md:-mt-16 md:pb-20">
-        <div className="overflow-hidden rounded-[1.5rem] border border-[#dce7e3] bg-white shadow-[0_22px_60px_rgb(10_34_43/0.14)]">
+        <div className="overflow-hidden rounded-[1.5rem] border border-[#eadfcb] bg-white shadow-[0_22px_60px_rgb(94_67_34/0.10)]">
           <div className="grid lg:grid-cols-[1.05fr_.95fr]">
-            <div className="relative overflow-hidden bg-[#003b53] p-7 text-white md:p-11">
-              <div className="absolute -right-20 -top-24 size-64 rounded-full border border-white/10" />
-              <div className="absolute -bottom-32 -left-20 size-72 rounded-full border border-[#ef7b12]/25" />
+            <div className="relative overflow-hidden bg-[var(--ches-sky)] p-7 text-[#2f261b] md:p-11">
+              <div className="absolute -right-20 -top-24 size-64 rounded-full border border-[#d89a2b]/20" />
+              <div className="absolute -bottom-32 -left-20 size-72 rounded-full border border-[#47785b]/18" />
               <div className="relative">
-                <p className="eyebrow text-[#ffae42]">A direct line to care</p>
+                <p className="eyebrow text-[#c87517]">A direct line to care</p>
                 <h2 className="mt-3 max-w-[510px] font-heading text-4xl font-semibold leading-[1.04] md:text-[3.35rem]">Every conversation can open a door to hope.</h2>
-                <p className="mt-5 max-w-[500px] text-sm leading-7 text-white/78 md:text-base">Whether you are planning a donation, exploring a partnership or simply want to understand our work, our team is ready to speak with you.</p>
+                <p className="mt-5 max-w-[500px] text-sm leading-7 text-[#4b4033]/78 md:text-base">Whether you are planning a donation, exploring a partnership or simply want to understand our work, our team is ready to speak with you.</p>
 
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                   <ContactAction icon={Phone} label="Call CHES" href="tel:04424726655" value="044 - 24726655" onActivate={() => setActiveContact("phone")} active={activeContact === "phone"} />
                   <ContactAction icon={Mail} label="Email CHES" href="mailto:ches_cheschennai@yahoo.co.in" value="ches_cheschennai@yahoo.co.in" onActivate={() => setActiveContact("email")} active={activeContact === "email"} />
                 </div>
-                <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/70">
-                  <span className="font-extrabold uppercase tracking-[0.12em] text-[#ffae42]">Other office lines</span>
-                  <a href="tel:04424731283" className="transition hover:text-[#ffae42]">044 - 24731283</a>
-                  <a href="tel:9940033249" className="transition hover:text-[#ffae42]">9940033249</a>
+                <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#5f5245]">
+                  <span className="font-extrabold uppercase tracking-[0.12em] text-[#c87517]">Other office lines</span>
+                  <a href="tel:04424731283" className="font-semibold transition hover:text-[#c87517]">044 - 24731283</a>
+                  <a href="tel:9940033249" className="font-semibold transition hover:text-[#c87517]">9940033249</a>
                 </div>
 
-                <div className="mt-7 rounded-xl border border-white/15 bg-white/8 p-4">
-                  <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[#ffae42]">Call Dr. P. Manorama</p>
-                  <p className="mt-2 text-sm font-bold text-white">MD; DCH; DM(Gastro)</p>
-                  <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-white/78">
-                    <a href="tel:+919444077177" className="transition hover:text-[#ffae42]">+91 - 9444077177</a>
-                    <a href="mailto:pmanorama54@gmail.com" className="transition hover:text-[#ffae42]">pmanorama54@gmail.com</a>
+                <div className="mt-7 rounded-xl border border-[#e6d7bd] bg-white/65 p-4 shadow-[0_12px_32px_rgb(115_82_39/0.08)]">
+                  <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[#c87517]">Call Dr. P. Manorama</p>
+                  <p className="mt-2 text-sm font-bold text-[#2f261b]">MD; DCH; DM(Gastro)</p>
+                  <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-[#4b4033]/78">
+                    <a href="tel:+919444077177" className="font-semibold transition hover:text-[#c87517]">+91 - 9444077177</a>
+                    <a href="mailto:pmanorama54@gmail.com" className="font-semibold transition hover:text-[#c87517]">pmanorama54@gmail.com</a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#fffaf2] p-7 md:p-11">
-              <div className="relative h-36 overflow-hidden rounded-xl bg-[#dbe9e3]">
+            <div className="bg-[#fffaf0] p-7 md:p-11">
+              <div className="relative h-36 overflow-hidden rounded-xl bg-[#efe6d2]">
                 <Image src="/Assets/About/ches-children-care.jpeg" alt="Children receiving care and support through CHES" fill className="object-cover object-center" sizes="(min-width: 1024px) 40vw, 100vw" />
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,59,83,.82),rgba(0,59,83,.08))]" />
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(77,57,31,.78),rgba(77,57,31,.06))]" />
                 <div className="absolute inset-x-5 bottom-4">
                   <p className="font-script text-3xl font-semibold text-white">Come and meet the work.</p>
                 </div>
@@ -111,30 +111,30 @@ export function ContactPageContent() {
                 <span className="grid size-11 place-items-center rounded-full bg-[#e58218] text-white"><MapPin className="size-5" /></span>
                 <div>
                   <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[#e58218]">Visit Us</p>
-                  <h3 className="mt-1 font-heading text-2xl font-semibold text-[#003b53]">Our Chennai office</h3>
+                  <h3 className="mt-1 font-heading text-2xl font-semibold text-[#3c3020]">Our Chennai office</h3>
                 </div>
               </div>
-              <p className="mt-5 text-sm font-bold leading-6 text-[#003b53]">{site.address}</p>
+              <p className="mt-5 text-sm font-bold leading-6 text-[#3c3020]">{site.address}</p>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 <ContactDetail icon={Clock3} label="Working hours" value="10 am to 5 pm" />
                 <ContactDetail icon={HeartHandshake} label="Office visits" value="All days in a week" />
               </div>
               <div className="mt-3 rounded-lg border border-[#e8d6bd] bg-white/75 p-3">
                 <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-[#e58218]">Prior information</p>
-                <p className="mt-1 text-sm font-bold leading-5 text-[#003b53]">Mr. P. Muthupandian</p>
-                <a href="tel:+919791655519" className="mt-1 inline-block text-sm font-semibold text-[#003b53] transition hover:text-[#e58218]">+91 - 9791655519</a>
+                <p className="mt-1 text-sm font-bold leading-5 text-[#3c3020]">Mr. P. Muthupandian</p>
+                <a href="tel:+919791655519" className="mt-1 inline-block text-sm font-semibold text-[#3c3020] transition hover:text-[#e58218]">+91 - 9791655519</a>
               </div>
-              <a href="https://maps.google.com/?q=CHES+McNichols+Road+Chennai" target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#003b53] transition hover:text-[#e58218]">
+              <a href="https://maps.google.com/?q=CHES+McNichols+Road+Chennai" target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#3c3020] transition hover:text-[#e58218]">
                 Open directions <Navigation className="size-4" />
               </a>
             </div>
           </div>
 
-          <div className="grid border-t border-[#e2e9e5] bg-[#f7fbf8] sm:grid-cols-3">
+          <div className="grid border-t border-[#eadfcb] bg-[#fff8ec] sm:grid-cols-3">
             {donorAssurances.map((item) => (
-              <div key={item.title} className="flex gap-3 border-b border-[#e2e9e5] p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 md:p-7">
+              <div key={item.title} className="flex gap-3 border-b border-[#eadfcb] p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 md:p-7">
                 <item.icon className="mt-0.5 size-7 shrink-0 text-[#e58218]" />
-                <div><h3 className="text-sm font-extrabold text-[#003b53]">{item.title}</h3><p className="mt-1 text-xs leading-5 text-[#102433]/65">{item.body}</p></div>
+                <div><h3 className="text-sm font-extrabold text-[#3c3020]">{item.title}</h3><p className="mt-1 text-xs leading-5 text-[#4b4033]/68">{item.body}</p></div>
               </div>
             ))}
           </div>
@@ -148,17 +148,17 @@ export function ContactPageContent() {
           </div>
           <div className="py-9 lg:px-8">
             <h2 className="max-w-[330px] font-heading text-4xl font-semibold leading-[1.03] md:text-[2.55rem]">Your Kindness<br />Can Change a Life</h2>
-            <p className="mt-4 max-w-[350px] text-sm leading-6 text-[#182a34]/82">Every contribution helps us provide healthcare, education, protection and hope to children who need it the most.</p>
+            <p className="mt-4 max-w-[350px] text-sm leading-6 text-[#4b4033]/82">Every contribution helps us provide healthcare, education, protection and hope to children who need it the most.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link href="/donate" className="primary-cta bg-[#ed7912] hover:bg-[#d96309]">Donate Now <Heart className="size-4 fill-current" /></Link>
-              <Link href="/projects" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#152b36] px-5 text-sm font-bold text-[#152b36] transition hover:bg-[#152b36] hover:text-white">See Our Impact <ArrowRight className="size-4" /></Link>
+              <Link href="/donate" className="primary-cta">Donate Now <Heart className="size-4 fill-current" /></Link>
+              <Link href="/projects" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#8c6e40] px-5 text-sm font-bold text-[#5a4428] transition hover:bg-[#8c6e40] hover:text-white">See Our Impact <ArrowRight className="size-4" /></Link>
             </div>
           </div>
           <div className="grid gap-x-7 gap-y-7 border-t border-[#d9ccb9] py-8 sm:grid-cols-2 lg:border-l lg:border-t-0 lg:pl-8">
             {trustItems.map((item) => (
               <div key={item.title} className="flex gap-4">
                 <item.icon className="size-8 shrink-0 text-[#e67a12]" />
-                <div><h3 className="text-sm font-bold">{item.title}</h3><p className="mt-1 text-xs leading-5 text-[#182a34]/76">{item.body}</p></div>
+                <div><h3 className="text-sm font-bold">{item.title}</h3><p className="mt-1 text-xs leading-5 text-[#4b4033]/76">{item.body}</p></div>
               </div>
             ))}
           </div>
@@ -184,9 +184,9 @@ function ContactAction({
   active: boolean;
 }) {
   return (
-    <a href={href} onClick={onActivate} className={`group min-w-0 rounded-xl border p-4 transition hover:-translate-y-0.5 hover:border-[#ffae42] ${active ? "border-[#ffae42] bg-white/14" : "border-white/15 bg-white/8"}`}>
-      <span className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-[#ffae42]"><Icon className="size-4" />{label}</span>
-      <span className="mt-2 block break-words text-sm font-bold leading-5 text-white group-hover:text-[#ffae42]">{value}</span>
+    <a href={href} onClick={onActivate} className={`group min-w-0 rounded-xl border p-4 shadow-[0_10px_26px_rgb(112_78_36/0.06)] transition hover:-translate-y-0.5 hover:border-[#d89a2b] ${active ? "border-[#d89a2b] bg-white/90" : "border-[#e6d7bd] bg-white/62"}`}>
+      <span className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-[#c87517]"><Icon className="size-4" />{label}</span>
+      <span className="mt-2 block break-words text-sm font-bold leading-5 text-[#3c3020] group-hover:text-[#c87517]">{value}</span>
     </a>
   );
 }
@@ -195,7 +195,7 @@ function ContactDetail({ icon: Icon, label, value }: { icon: LucideIcon; label: 
   return (
     <div className="rounded-lg border border-[#e8d6bd] bg-white/75 p-3">
       <div className="flex items-center gap-2 text-[#e58218]"><Icon className="size-4" /><p className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em]">{label}</p></div>
-      <p className="mt-2 text-sm font-bold leading-5 text-[#003b53]">{value}</p>
+      <p className="mt-2 text-sm font-bold leading-5 text-[#3c3020]">{value}</p>
     </div>
   );
 }
