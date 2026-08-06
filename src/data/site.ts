@@ -230,20 +230,24 @@ export const faqs = [
 
 export const donationDetails = {
   upiId: "ches@upi",
+  chequePayableTo: "CHES",
   domestic: {
-    accountName: "Community Health Education Society (CHES)",
+    accountName: "CHES",
     bankName: "Indian Bank",
-    accountNumber: "602315871",
-    ifsc: "IDIB000C074",
-    branch: "Royapettah, Chennai - 600 014",
+    bankAddress: "3RD Cross Street, Trustpuram, Kodambakkam, CHENNAI 600024.",
+    cityCountry: "Chennai, India",
+    accountNumber: "401654391",
+    ifsc: "IDIB000K040",
+    swift: "IDIBINBBMAS",
   },
   international: {
-    bankName: "International Bank Placeholder",
-    swift: "SWFTINBBXXX",
-    accountNumber: "000000000000",
-    ifsc: "BANK0000000",
-    branch: "Chennai Main Branch",
-    address: "Chennai, Tamil Nadu, India",
+    bankName: "State Bank of India",
+    bankAddress: "State Bank of India, New Delhi Main Branch, 11 Sansad Marg, New Delhi - 110001",
+    cityCountry: "Delhi, India",
+    accountName: "Community Health Education Society",
+    accountNumber: "40304509979",
+    ifsc: "SBIN0000691",
+    swift: "SBININBB104",
   },
 };
 
