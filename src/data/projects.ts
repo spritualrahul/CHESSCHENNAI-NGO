@@ -92,8 +92,8 @@ export const chesProjects: ChesProject[] = [
       "Operating at the Government Reception Unit, Royapuram, this project rescues and rehabilitates children in need of care and protection. We provide counselling, family reintegration and follow-up support to ensure every child is safe and supported.",
     detailIntro:
       "Project Resource Centre works with children in need of care and protection at the Government Reception Unit, Royapuram. The project focuses on rescue, rehabilitation, counselling, family tracing, safe reintegration and follow-up so each child is protected beyond immediate crisis care.",
-    image: "/Assets/Galary/IMG_3127.jpeg",
-    imageAlt: "Children and families connected through a CHES community programme",
+    image: "/Assets/Galary/DSCN0324.JPG",
+    imageAlt: "Children participating in a structured CHES Resource Centre activity",
     achievements: [
       "80% children reunified within JJ Act time",
       "85% children taken back by parents",
@@ -207,8 +207,8 @@ export const chesProjects: ChesProject[] = [
       "Following the tsunami, CHES worked with children and communities to provide psychosocial support, restore a sense of safety and help families begin rebuilding their lives.",
     detailIntro:
       "Malarghal Tsunami Psychosocial Support helped children and families recover after disaster through emotional care, community activities, counselling and practical support. The project focused on restoring confidence, routine and a sense of safety.",
-    image: "/Assets/Galary/IMG_3127.jpeg",
-    imageAlt: "Children taking part in a joyful CHES community gathering",
+    image: "/Assets/Galary/India Kids 2 copy.jpg",
+    imageAlt: "Children standing near a damaged home during post-tsunami community recovery",
     achievements: [
       "Psychosocial support for children and families",
       "Community activities that restored confidence",
