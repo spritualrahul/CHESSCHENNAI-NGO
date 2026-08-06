@@ -25,7 +25,7 @@ export function Footer() {
           <Link href="/" aria-label="CHES home">
             <span className="flex items-center gap-2.5">
               <span className="relative grid size-10 overflow-hidden rounded-full border border-[var(--ches-blue)]/10 bg-white">
-                <Image src="/Assets/Donor logo/CHES LOGO.jpg" alt={`${site.fullName} logo`} fill className="object-cover p-0.5" />
+                <Image src="/Assets/Donor logo/CHES LOGO.jpg" alt={`${site.fullName} logo`} fill sizes="40px" className="object-cover p-0.5" />
               </span>
               <span>
                 <span className="block font-heading text-2xl font-semibold leading-none text-[var(--ches-blue)]">CHES</span>
@@ -102,7 +102,7 @@ export function Footer() {
             <p className="flex gap-2"><Phone className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.phone}</p>
             <p className="flex gap-2"><Mail className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.email}</p>
           </div>
-          {!isContact ? <form className="mt-5 flex overflow-hidden rounded-lg border border-[#dce5e2] bg-white p-1">
+          {!isContact ? <form onSubmit={(e) => e.preventDefault()} className="mt-5 flex overflow-hidden rounded-lg border border-[#dce5e2] bg-white p-1">
             <label className="sr-only" htmlFor="newsletter-email">Email address</label>
             <input id="newsletter-email" type="email" placeholder="Enter your email" className="min-w-0 flex-1 px-3 text-xs outline-none" />
             <button type="submit" aria-label="Subscribe" className="grid size-8 place-items-center rounded-md bg-[var(--ches-blue)] text-white transition hover:bg-[var(--ches-orange)]"><ArrowRight className="size-4" /></button>
@@ -113,7 +113,7 @@ export function Footer() {
           <div>
             <h2 className="text-sm font-bold text-[var(--ches-blue)]">Stay Updated</h2>
             <p className="mt-4 text-sm text-[var(--ches-muted)]">Subscribe to our newsletter</p>
-            <form className="mt-4 flex overflow-hidden rounded-lg border border-[#dce5e2] bg-white p-1">
+            <form onSubmit={(e) => e.preventDefault()} className="mt-4 flex overflow-hidden rounded-lg border border-[#dce5e2] bg-white p-1">
               <label className="sr-only" htmlFor="contact-newsletter-email">Email address</label>
               <input id="contact-newsletter-email" type="email" placeholder="Enter your email" className="min-w-0 flex-1 px-3 text-xs text-[#102433] outline-none" />
               <button type="submit" aria-label="Subscribe" className="grid size-8 place-items-center rounded-md bg-[#e67a12] text-white transition hover:bg-[#f08c26]"><ArrowRight className="size-4" /></button>

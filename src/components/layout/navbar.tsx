@@ -23,7 +23,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center" aria-label="CHES home">
           <span className="flex items-center gap-2.5">
             <span className="relative grid size-10 overflow-hidden rounded-full border border-[var(--ches-blue)]/10 bg-white">
-              <Image src="/Assets/Donor logo/CHES LOGO.jpg" alt={`${site.fullName} logo`} fill priority className="object-cover p-0.5" />
+              <Image src="/Assets/Donor logo/CHES LOGO.jpg" alt={`${site.fullName} logo`} fill priority sizes="40px" className="object-cover p-0.5" />
             </span>
             <span>
               <span className="block font-heading text-[1.65rem] font-semibold leading-none text-[var(--ches-blue)]">CHES</span>

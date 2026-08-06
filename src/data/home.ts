@@ -137,13 +137,6 @@ export const principles = [
   { icon: Sprout, title: "Overall Growth", text: "Every child’s overall growth will be given more importance." },
 ] satisfies Array<{ icon: LucideIcon; title: string; text: string }>;
 
-export const storyMarkers = [
-  { value: "30+", label: "Years of service" },
-  { value: "1000+", label: "Children supported" },
-  { value: "1994", label: "Trusted NGO" },
-  { value: "Hope", label: "At the centre" },
-];
-
 export const footerSocials = [
   { label: "Facebook", href: "#", icon: Users },
   { label: "WhatsApp", href: "#", icon: MessageCircleHeart },

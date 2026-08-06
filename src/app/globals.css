@@ -42,7 +42,7 @@
   --ches-warm-white: #fffefa;
   --ches-sky: #f2f9fc;
   --ches-leaf: #f7fbf5;
-  --ches-rose: #47785b;
+  --ches-rose: #d35d6e;
   --background: #fffefa;
   --foreground: var(--ches-ink);
   --card: #ffffff;
@@ -98,6 +98,10 @@
 @layer components {
   .primary-cta {
     @apply inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[var(--ches-orange)] px-6 text-sm font-bold text-white shadow-md shadow-[#b3781d]/20 transition hover:-translate-y-0.5 hover:bg-[#c98920];
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.16em];
   }
 
   .secondary-cta {

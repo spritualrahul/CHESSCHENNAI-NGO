@@ -17,8 +17,10 @@ function ChapterLabel({ number, message }: { number: string; message: string }) 
 
 function ChapterPhoto({ image, className = "" }: { image: { src: string; alt: string }; className?: string }) {
   return (
-    <div className={`chapter-photo aspect-[4/3] ${className}`}>
-      <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
+    <div className={className}>
+      <div className="chapter-photo aspect-[4/3]">
+        <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
+      </div>
     </div>
   );
 }

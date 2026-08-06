@@ -69,9 +69,9 @@ export async function DonationForm() {
   });
 
   return (
-    <main className="overflow-hidden bg-[#fffefa] text-[#122d2d]">
+    <div className="overflow-hidden bg-[#fffefa] text-[#122d2d]">
       <section className="relative isolate overflow-hidden bg-[#f8f0dd] pt-20">
-        <Image src={heroImage} alt="A watering can nurturing a seedling growing from a jar" fill preload className="object-contain object-right" sizes="100vw" />
+        <Image src={heroImage} alt="A watering can nurturing a seedling growing from a jar" fill priority className="object-contain object-right" sizes="100vw" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,254,250,.98)_0%,rgba(255,254,250,.94)_30%,rgba(255,254,250,.55)_51%,rgba(255,254,250,.1)_75%,rgba(255,254,250,.03)_100%)]" />
         <div className="relative mx-auto flex min-h-[470px] max-w-7xl items-center px-5 py-14 md:min-h-[500px]">
           <div className="max-w-[560px]">
@@ -169,7 +169,7 @@ export async function DonationForm() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

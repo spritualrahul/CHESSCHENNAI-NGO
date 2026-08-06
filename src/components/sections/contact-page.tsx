@@ -37,7 +37,7 @@ export function ContactPageContent() {
   const [activeContact, setActiveContact] = useState<string | null>(null);
 
   return (
-    <main className="contact-page overflow-hidden bg-[#fffdf8] text-[#2f261b]">
+    <div className="contact-page overflow-hidden bg-[#fffdf8] text-[#2f261b]">
       <section className="contact-hero relative isolate overflow-hidden bg-[var(--ches-sky)] pt-20 text-[#2f261b]">
         <Image
           src="/placeholders/contact-hero-fresh.png"
@@ -177,7 +177,7 @@ export function ContactPageContent() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 
