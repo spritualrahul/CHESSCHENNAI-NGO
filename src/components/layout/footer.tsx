@@ -18,7 +18,7 @@ export function Footer() {
       <div
         className={cn(
           "mx-auto grid max-w-6xl gap-9 border-b border-[#e4e9e7] pb-8",
-          isContact ? "lg:grid-cols-[1.25fr_.7fr_.9fr_1.2fr_1fr]" : "md:grid-cols-[1.3fr_.75fr_1.1fr_1fr]",
+          isContact ? "lg:grid-cols-[1.05fr_.55fr_.75fr_1.8fr_.9fr]" : "md:grid-cols-[1.05fr_.65fr_.85fr_1.6fr]",
         )}
       >
         <div>
@@ -73,13 +73,31 @@ export function Footer() {
         <div>
           <h2 className="text-sm font-bold text-[var(--ches-blue)]">Get In Touch</h2>
           <div className="mt-4 grid gap-3 text-xs leading-5 text-[var(--ches-muted)]">
-            <address className="flex gap-2 not-italic">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" />
-              <span>
-                {site.addressLines.map((line) => (
-                  <span key={line} className="block">{line}</span>
-                ))}
-              </span>
+            <address className="not-italic">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-lg border border-[#e4ece8] bg-[#fbfdfc] p-3 shadow-[0_8px_22px_rgb(11_78_109/0.04)]">
+                  <div className="mb-2 flex items-center gap-2">
+                    <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[var(--ches-blue)]/8 text-[var(--ches-blue)]">
+                      <MapPin className="size-3.5" />
+                    </span>
+                    <span className="font-bold text-[var(--ches-blue)]">Sakthi Illam</span>
+                  </div>
+                  {site.addressLines.slice(1).map((line) => (
+                    <span key={line} className="block">{line}</span>
+                  ))}
+                </div>
+                <div className="rounded-lg border border-[#eadfcb] bg-[#fffaf0] p-3 shadow-[0_8px_22px_rgb(94_67_34/0.04)]">
+                  <div className="mb-2 flex items-center gap-2">
+                    <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[var(--ches-orange)]/12 text-[var(--ches-orange)]">
+                      <MapPin className="size-3.5" />
+                    </span>
+                    <span className="font-bold text-[var(--ches-blue)]">Anandha Illam</span>
+                  </div>
+                  {site.anandhaIllamAddressLines.slice(1).map((line) => (
+                    <span key={line} className="block">{line}</span>
+                  ))}
+                </div>
+              </div>
             </address>
             <p className="flex gap-2"><Phone className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.phone}</p>
             <p className="flex gap-2"><Mail className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.email}</p>
