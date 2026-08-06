@@ -229,12 +229,13 @@ export const faqs = [
 ];
 
 export const donationDetails = {
-  upiId: "cheschennai@upi",
+  upiId: "ches@upi",
   domestic: {
-    bankName: "Bank Name Placeholder",
-    accountNumber: "000000000000",
-    ifsc: "BANK0000000",
-    branch: "Chennai Main Branch",
+    accountName: "Community Health Education Society (CHES)",
+    bankName: "Indian Bank",
+    accountNumber: "602315871",
+    ifsc: "IDIB000C074",
+    branch: "Royapettah, Chennai - 600 014",
   },
   international: {
     bankName: "International Bank Placeholder",

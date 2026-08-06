@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 36" role="img" aria-labelledby="title">
+  <title id="title">BHIM UPI</title>
+  <rect width="120" height="36" fill="none"/>
+  <path fill="#F58220" d="M7 6h16l-8 11z"/>
+  <path fill="#14833B" d="M7 30h16l-8-11z"/>
+  <path fill="#5E686E" d="M24 6h4l-12 24h-4z"/>
+  <text x="36" y="24.5" fill="#454B4F" font-family="Arial, Helvetica, sans-serif" font-size="22" font-style="italic" font-weight="900">BHIM</text>
+  <text x="94" y="24.5" fill="#14833B" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800">UPI</text>
+</svg>

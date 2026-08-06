@@ -280,7 +280,6 @@ export function ProjectsPageContent() {
       <CtaBand
         title="Be a Part of Their Tomorrow"
         body="Your support helps us continue our mission of care, protection, education and empowerment."
-        volunteerHref="/contact"
       />
     </>
   );

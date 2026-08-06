@@ -40,10 +40,12 @@ const trustItems = [
 ];
 
 const initialVisibleCount = 9;
+const galleryHeroVideo = "/Assets/video/make_this_as_a_video___motion.mp4";
 
 export function GalleryPageContent() {
   const [activeFilter, setActiveFilter] = useState<GalleryCategory>("All");
   const [showAll, setShowAll] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const filteredPhotos = useMemo(() => {
     if (activeFilter === "All") return galleryPhotos;
@@ -60,17 +62,28 @@ export function GalleryPageContent() {
 
   return (
     <>
-      <section className="relative isolate min-h-[510px] overflow-hidden bg-[var(--ches-blue)] px-5 pt-24 text-white md:min-h-[560px]">
+      <section className="relative isolate min-h-[760px] overflow-hidden bg-[var(--ches-blue)] px-5 pt-24 text-white md:min-h-[820px]">
         <Image
           src="/Assets/Banner-carousel/ChatGPT Image Aug 5, 2026, 11_24_14 AM.png"
           alt="Children smiling together in a CHES moment of hope"
           fill
           priority
-          className="object-cover object-center md:object-[center_42%]"
+          className={`object-cover object-[center_28%] transition-opacity duration-500 ${isVideoPlaying ? "opacity-0" : "opacity-100"}`}
           sizes="100vw"
         />
+        {isVideoPlaying ? (
+          <video
+            src={galleryHeroVideo}
+            className="absolute inset-0 h-full w-full object-cover object-[center_28%]"
+            autoPlay
+            playsInline
+            muted
+            controls
+            onEnded={() => setIsVideoPlaying(false)}
+          />
+        ) : null}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,18,20,.94)_0%,rgba(9,18,20,.76)_36%,rgba(9,18,20,.18)_72%,rgba(9,18,20,.08)_100%)]" />
-        <div className="relative mx-auto flex min-h-[420px] max-w-7xl items-center pb-12 md:min-h-[480px]">
+        <div className="relative mx-auto flex min-h-[670px] max-w-7xl items-center pb-12 md:min-h-[740px]">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -94,12 +107,13 @@ export function GalleryPageContent() {
               </Link>
               <button
                 type="button"
+                onClick={() => setIsVideoPlaying(true)}
                 className="inline-flex h-12 items-center gap-3 rounded-full px-1 pr-4 text-sm font-semibold text-white transition hover:text-[var(--ches-gold)]"
               >
                 <span className="grid size-10 place-items-center rounded-full border border-[var(--ches-gold)] bg-black/15 text-[var(--ches-gold)]">
                   <Play className="ml-0.5 size-4 fill-current" />
                 </span>
-                Play Video
+                {isVideoPlaying ? "Playing Video" : "Play Video"}
               </button>
             </div>
           </motion.div>
@@ -223,12 +237,6 @@ export function GalleryPageContent() {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link href="/donate" className="primary-cta">
                 Donate Now <Heart className="size-4 fill-current" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-[var(--ches-ink)]/35 bg-white px-6 text-sm font-bold text-[var(--ches-ink)] transition hover:border-[var(--ches-orange)] hover:text-[var(--ches-orange)]"
-              >
-                Become a Volunteer <UserRoundCheck className="size-4" />
               </Link>
             </div>
           </div>

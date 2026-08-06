@@ -1,4 +1,4 @@
-import { ArrowRight, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,15 +7,11 @@ import { storyImages } from "@/data/home";
 type CtaBandProps = {
   title?: string;
   body?: string;
-  volunteerHref?: string;
-  volunteerText?: string;
 };
 
 export function CtaBand({
   title = "Your Kindness Can Change a Child's Tomorrow",
   body = "Every contribution helps provide education, healthcare, protection, and hope to children who need it most.",
-  volunteerHref = "/about",
-  volunteerText = "Become a Volunteer",
 }: CtaBandProps) {
   return (
     <section className="relative overflow-hidden bg-[var(--ches-blue)] px-5 py-12 text-white md:py-14">
@@ -31,9 +27,6 @@ export function CtaBand({
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/donate" className="primary-cta">
               Donate Now <Heart className="size-4 fill-current" />
-            </Link>
-            <Link href={volunteerHref} className="secondary-cta">
-              {volunteerText} <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>

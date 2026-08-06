@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const donateHref = pathname === "/donate" ? "#donate-payment" : "/donate";
 
   return (
     <header
@@ -52,7 +53,7 @@ export function Navbar() {
         </div>
 
         <div className="hidden lg:block">
-          <Link href="/donate" className="primary-cta h-12 px-6">
+          <Link href={donateHref} className="primary-cta h-12 px-6">
             Donate Now <Heart className="size-4 fill-current" />
           </Link>
         </div>
@@ -95,7 +96,7 @@ export function Navbar() {
                 </Link>
               ))}
             </div>
-            <Link href="/donate" onClick={() => setOpen(false)} className="primary-cta w-full">
+            <Link href={donateHref} onClick={() => setOpen(false)} className="primary-cta w-full">
               Donate Now <Heart className="size-4 fill-current" />
             </Link>
           </motion.div>
