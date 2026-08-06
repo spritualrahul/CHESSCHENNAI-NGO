@@ -114,17 +114,30 @@ export function ContactPageContent() {
                   <h3 className="mt-1 font-heading text-2xl font-semibold text-[#3c3020]">Our Chennai office</h3>
                 </div>
               </div>
-              <p className="mt-5 text-sm font-bold leading-6 text-[#3c3020]">{site.address}</p>
+              <div className="mt-5 grid gap-3">
+                <AddressCard
+                  title="Sakthi Illam"
+                  lines={site.addressLines}
+                  visitLabel="Office visits"
+                  visitValue="Mon to Saturday"
+                />
+                <AddressCard
+                  title="Anandha Illam"
+                  lines={site.anandhaIllamAddressLines}
+                  visitLabel="Anandha Illam visits"
+                  visitValue="Throughout the week"
+                />
+              </div>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 <ContactDetail icon={Clock3} label="Working hours" value="10 am to 5 pm" />
-                <ContactDetail icon={HeartHandshake} label="Office visits" value="All days in a week" />
+                <ContactDetail icon={HeartHandshake} label="Visit information" value="Prior information requested" />
               </div>
               <div className="mt-3 rounded-lg border border-[#e8d6bd] bg-white/75 p-3">
                 <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-[#e58218]">Prior information</p>
                 <p className="mt-1 text-sm font-bold leading-5 text-[#3c3020]">Mr. P. Muthupandian</p>
                 <a href="tel:+919791655519" className="mt-1 inline-block text-sm font-semibold text-[#3c3020] transition hover:text-[#e58218]">+91 - 9791655519</a>
               </div>
-              <a href="https://maps.google.com/?q=CHES+McNichols+Road+Chennai" target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#3c3020] transition hover:text-[#e58218]">
+              <a href="https://maps.google.com/?q=Sakthi+Illam+21%2F8+5th+Cross+Street+United+India+Colony+Kodambakkam+Chennai+600024" target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#3c3020] transition hover:text-[#e58218]">
                 Open directions <Navigation className="size-4" />
               </a>
             </div>
@@ -165,6 +178,27 @@ export function ContactPageContent() {
         </div>
       </section>
     </main>
+  );
+}
+
+function AddressCard({ title, lines, visitLabel, visitValue }: { title: string; lines: string[]; visitLabel: string; visitValue: string }) {
+  return (
+    <div className="rounded-lg border border-[#e8d6bd] bg-white/75 p-4">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-[#e58218]">{title}</p>
+          <address className="mt-2 not-italic text-sm font-bold leading-6 text-[#3c3020]">
+            {lines.map((line) => (
+              <span key={line} className="block">{line}</span>
+            ))}
+          </address>
+        </div>
+        <MapPin className="mt-1 size-5 shrink-0 text-[#e58218]" />
+      </div>
+      <div className="mt-3 rounded-md bg-[#fff7e8] px-3 py-2 text-xs font-bold text-[#5a4428]">
+        <span className="text-[#c87517]">{visitLabel}:</span> {visitValue}
+      </div>
+    </div>
   );
 }
 

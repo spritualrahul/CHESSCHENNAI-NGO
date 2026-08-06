@@ -47,7 +47,22 @@ export const site = {
   url: "https://cheschennai.org",
   email: "ches_cheschennai@yahoo.co.in / pmanorama54@gmail.com",
   phone: "044 - 24726655 / 044 - 24731283 / 9940033249",
-  address: "No. 2, McNichols Road, Chetpet, Chennai - 600 031, India",
+  address: "Sakthi Illam, 21/8, 5th Cross Street, United India Colony, Kodambakkam, Chennai - 600 024",
+  addressLines: [
+    "Sakthi Illam",
+    "21/8, 5th Cross Street",
+    "United India Colony",
+    "Kodambakkam",
+    "Chennai - 600 024",
+  ],
+  anandhaIllamAddressLines: [
+    "Anandha Illam",
+    "85/1, Ernavakkam",
+    "Pandikavanur Panchayat",
+    "Ponneri Taluk",
+    "Thiruvallur",
+    "Chennai - 67",
+  ],
 };
 
 export const navItems: NavItem[] = [

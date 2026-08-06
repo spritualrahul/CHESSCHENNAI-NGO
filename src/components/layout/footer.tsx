@@ -73,7 +73,14 @@ export function Footer() {
         <div>
           <h2 className="text-sm font-bold text-[var(--ches-blue)]">Get In Touch</h2>
           <div className="mt-4 grid gap-3 text-xs leading-5 text-[var(--ches-muted)]">
-            <p className="flex gap-2"><MapPin className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.address}</p>
+            <address className="flex gap-2 not-italic">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" />
+              <span>
+                {site.addressLines.map((line) => (
+                  <span key={line} className="block">{line}</span>
+                ))}
+              </span>
+            </address>
             <p className="flex gap-2"><Phone className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.phone}</p>
             <p className="flex gap-2"><Mail className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.email}</p>
           </div>
