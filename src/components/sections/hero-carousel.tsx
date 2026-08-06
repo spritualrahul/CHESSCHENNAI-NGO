@@ -17,12 +17,14 @@ const heroStats = [
 
 export function HeroCarousel() {
   const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(1);
   const prefersReducedMotion = useReducedMotion();
   const slide = homeHeroSlides[active];
 
   useEffect(() => {
     if (prefersReducedMotion) return;
     const timer = window.setInterval(() => {
+      setDirection(1);
       setActive((index) => (index + 1) % homeHeroSlides.length);
     }, 7200);
     return () => window.clearInterval(timer);
@@ -31,14 +33,15 @@ export function HeroCarousel() {
   return (
     <section className="relative bg-white pt-20" aria-label="CHES introduction">
       <div className="relative min-h-[560px] overflow-hidden bg-[var(--ches-blue)] text-white md:min-h-[590px]">
-        <AnimatePresence initial={false}>
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={slide.src}
             className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
+            custom={direction}
+            initial={prefersReducedMotion ? { opacity: 0 } : (slideDirection: number) => ({ opacity: 0.9, x: `${slideDirection * 100}%` })}
+            animate={{ opacity: 1, x: "0%" }}
+            exit={prefersReducedMotion ? { opacity: 0 } : (slideDirection: number) => ({ opacity: 0.9, x: `${slideDirection * -100}%` })}
+            transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
           >
             <motion.div
               className="absolute inset-0"
@@ -91,7 +94,11 @@ export function HeroCarousel() {
               type="button"
               aria-label={`Show slide ${index + 1}`}
               aria-current={active === index}
-              onClick={() => setActive(index)}
+              onClick={() => {
+                if (index === active) return;
+                setDirection(index > active ? 1 : -1);
+                setActive(index);
+              }}
               className="h-1.5 w-6 rounded-full bg-white/45 transition-all aria-current:w-12 aria-current:bg-[#e0aa42]"
             />
           ))}
