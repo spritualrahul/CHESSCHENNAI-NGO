@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import {
   ArrowDown,
   BookOpenCheck,
+  ChevronLeft,
+  ChevronRight,
   Heart,
   Play,
   ReceiptText,
@@ -39,13 +41,14 @@ const trustItems = [
   },
 ];
 
-const initialVisibleCount = 9;
+const initialVisibleCount = 8;
 const galleryHeroVideo = "/Assets/video/make_this_as_a_video___motion.mp4";
 
 export function GalleryPageContent() {
   const [activeFilter, setActiveFilter] = useState<GalleryCategory>("All");
   const [showAll, setShowAll] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   const filteredPhotos = useMemo(() => {
     if (activeFilter === "All") return galleryPhotos;
@@ -54,10 +57,21 @@ export function GalleryPageContent() {
 
   const visiblePhotos = showAll ? filteredPhotos : filteredPhotos.slice(0, initialVisibleCount);
   const hasMore = filteredPhotos.length > initialVisibleCount && !showAll;
+  const carouselPhotos = useMemo(() => {
+    const featured = filteredPhotos.filter((photo) => photo.featured);
+    return featured.length > 0 ? featured : filteredPhotos.slice(0, 6);
+  }, [filteredPhotos]);
+  const activeSlide = carouselPhotos.length > 0 ? carouselPhotos[activeSlideIndex % carouselPhotos.length] : null;
 
   function handleFilterChange(filter: GalleryCategory) {
     setActiveFilter(filter);
     setShowAll(false);
+    setActiveSlideIndex(0);
+  }
+
+  function handleSlideChange(direction: 1 | -1) {
+    if (carouselPhotos.length === 0) return;
+    setActiveSlideIndex((current) => (current + direction + carouselPhotos.length) % carouselPhotos.length);
   }
 
   return (
@@ -155,7 +169,112 @@ export function GalleryPageContent() {
             </div>
           </div>
 
-          <motion.div layout className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {activeSlide ? (
+            <div className="mt-8 grid gap-5 lg:grid-cols-[1.35fr_.65fr]">
+              <motion.div
+                key={activeSlide.image}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative min-h-[300px] overflow-hidden rounded-lg bg-[#dfe8e4] shadow-[0_18px_42px_rgb(11_78_109/0.10)] md:min-h-[430px]"
+              >
+                <Image
+                  src={activeSlide.image}
+                  alt={activeSlide.alt}
+                  fill
+                  className="object-cover transition duration-700 group-hover:scale-[1.025]"
+                  sizes="(min-width: 1024px) 62vw, 100vw"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,22,27,.04)_18%,rgba(5,22,27,.76)_100%)]" />
+                <div className="absolute inset-x-0 bottom-0 p-5 text-white md:p-7">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/92 px-4 py-2 text-xs font-extrabold text-[var(--ches-ink)] shadow-[0_10px_24px_rgb(0_0_0/0.18)] backdrop-blur">
+                    <CategoryIcon category={activeSlide.category} />
+                    {activeSlide.category}
+                  </span>
+                  <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                    <div>
+                      <h3 className="font-heading text-3xl font-semibold leading-tight md:text-5xl">{activeSlide.title}</h3>
+                      <p className="mt-2 max-w-xl text-sm leading-6 text-white/82">{activeSlide.alt}</p>
+                    </div>
+                    <div className="flex shrink-0 items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => handleSlideChange(-1)}
+                        aria-label="Previous gallery photo"
+                        className="grid size-11 place-items-center rounded-full border border-white/45 bg-black/25 text-white transition hover:border-[var(--ches-gold)] hover:text-[var(--ches-gold)]"
+                      >
+                        <ChevronLeft className="size-5" />
+                      </button>
+                      <span className="min-w-14 text-center text-xs font-extrabold text-white/82">
+                        {(activeSlideIndex % carouselPhotos.length) + 1}/{carouselPhotos.length}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleSlideChange(1)}
+                        aria-label="Next gallery photo"
+                        className="grid size-11 place-items-center rounded-full border border-white/45 bg-black/25 text-white transition hover:border-[var(--ches-gold)] hover:text-[var(--ches-gold)]"
+                      >
+                        <ChevronRight className="size-5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <div className="rounded-lg border border-[#d9e1df] bg-white p-4 shadow-[0_12px_30px_rgb(11_78_109/0.06)]">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--ches-orange)]">Featured Moments</p>
+                    <h3 className="mt-1 font-heading text-2xl font-semibold text-[var(--ches-blue)]">Browse highlights</h3>
+                  </div>
+                  <span className="rounded-full bg-[#eef5f2] px-3 py-1 text-xs font-extrabold text-[var(--ches-green)]">
+                    {filteredPhotos.length} photos
+                  </span>
+                </div>
+                <div className="mt-4 grid grid-cols-3 gap-3 lg:grid-cols-2">
+                  {carouselPhotos.slice(0, 6).map((photo, index) => {
+                    const active = photo.image === activeSlide.image;
+
+                    return (
+                      <button
+                        key={photo.image}
+                        type="button"
+                        onClick={() => setActiveSlideIndex(index)}
+                        className={`group relative aspect-[4/3] overflow-hidden rounded-lg border transition ${
+                          active
+                            ? "border-[var(--ches-orange)] shadow-[0_8px_20px_rgb(216_154_43/0.22)]"
+                            : "border-[#dfe8e3] hover:border-[var(--ches-orange)]"
+                        }`}
+                      >
+                        <Image
+                          src={photo.image}
+                          alt={photo.alt}
+                          fill
+                          className="object-cover transition duration-500 group-hover:scale-105"
+                          sizes="(min-width: 1024px) 15vw, 30vw"
+                        />
+                        <span className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(4,16,19,.72))] px-2 pb-2 pt-8 text-left text-[0.68rem] font-extrabold leading-3 text-white">
+                          {photo.title}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          ) : null}
+
+          <div className="mt-10 flex flex-col gap-3 border-t border-[#e1e8e5] pt-7 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--ches-orange)]">Photo Wall</p>
+              <h3 className="mt-1 font-heading text-3xl font-semibold text-[var(--ches-blue)]">Recent moments</h3>
+            </div>
+            <p className="text-sm font-medium text-[var(--ches-ink)]/70">
+              Showing {visiblePhotos.length} of {filteredPhotos.length} photos
+            </p>
+          </div>
+
+          <motion.div layout className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {visiblePhotos.map((photo, index) => (
               <motion.article
                 layout
@@ -164,29 +283,19 @@ export function GalleryPageContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-8% 0px" }}
                 transition={{ duration: 0.45, delay: Math.min(index * 0.025, 0.16) }}
-                className="group relative min-h-[210px] overflow-hidden rounded-lg bg-[#e7ece7] shadow-[0_10px_26px_rgb(11_78_109/0.08)] md:min-h-[250px]"
+                className="group relative aspect-[4/3] overflow-hidden rounded-lg bg-[#e7ece7] shadow-[0_8px_22px_rgb(11_78_109/0.07)]"
               >
                 <Image
                   src={photo.image}
                   alt={photo.alt}
                   fill
                   className="object-cover transition duration-700 group-hover:scale-105"
-                  sizes="(min-width: 1024px) 31vw, (min-width: 768px) 48vw, 100vw"
+                  sizes="(min-width: 1024px) 24vw, (min-width: 640px) 48vw, 100vw"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_54%,rgba(4,16,19,.46)_100%)] opacity-90" />
-                <div className="absolute bottom-4 left-4">
-                  <span className="inline-flex items-center gap-2 rounded-full bg-white/92 px-4 py-2 text-xs font-extrabold text-[var(--ches-ink)] shadow-[0_8px_20px_rgb(0_0_0/0.16)] backdrop-blur">
-                    <span className="grid size-5 place-items-center rounded-full bg-[var(--ches-gold)]/18 text-[var(--ches-orange)]">
-                      {photo.category === "Education" ? (
-                        <BookOpenCheck className="size-3.5" />
-                      ) : photo.category === "Health" ? (
-                        <Heart className="size-3.5" />
-                      ) : photo.category === "Community" ? (
-                        <UserRoundCheck className="size-3.5" />
-                      ) : (
-                        <CameraDot />
-                      )}
-                    </span>
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(4,16,19,.54)_100%)] opacity-90" />
+                <div className="absolute inset-x-3 bottom-3">
+                  <span className="inline-flex max-w-full items-center gap-2 rounded-full bg-white/94 px-3 py-1.5 text-[0.68rem] font-extrabold text-[var(--ches-ink)] shadow-[0_8px_20px_rgb(0_0_0/0.14)] backdrop-blur">
+                    <CategoryIcon category={photo.category} />
                     {photo.category}
                   </span>
                 </div>
@@ -207,7 +316,17 @@ export function GalleryPageContent() {
                 onClick={() => setShowAll(true)}
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-[#ccd8d7] bg-white px-7 text-sm font-extrabold text-[var(--ches-blue)] shadow-[0_8px_22px_rgb(11_78_109/0.06)] transition hover:-translate-y-0.5 hover:border-[var(--ches-orange)] hover:text-[var(--ches-orange)]"
               >
-                Load More Photos <ArrowDown className="size-4" />
+                Show More Photos <ArrowDown className="size-4" />
+              </button>
+            </div>
+          ) : showAll && filteredPhotos.length > initialVisibleCount ? (
+            <div className="mt-8 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setShowAll(false)}
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-[#ccd8d7] bg-white px-7 text-sm font-extrabold text-[var(--ches-blue)] shadow-[0_8px_22px_rgb(11_78_109/0.06)] transition hover:-translate-y-0.5 hover:border-[var(--ches-orange)] hover:text-[var(--ches-orange)]"
+              >
+                Show Less Photos
               </button>
             </div>
           ) : null}
@@ -266,5 +385,21 @@ export function GalleryPageContent() {
 function CameraDot() {
   return (
     <span className="block size-2.5 rounded-full border-2 border-current" aria-hidden="true" />
+  );
+}
+
+function CategoryIcon({ category }: { category: Exclude<GalleryCategory, "All"> }) {
+  return (
+    <span className="grid size-5 shrink-0 place-items-center rounded-full bg-[var(--ches-gold)]/18 text-[var(--ches-orange)]">
+      {category === "Education" ? (
+        <BookOpenCheck className="size-3.5" />
+      ) : category === "Health" ? (
+        <Heart className="size-3.5" />
+      ) : category === "Community" ? (
+        <UserRoundCheck className="size-3.5" />
+      ) : (
+        <CameraDot />
+      )}
+    </span>
   );
 }

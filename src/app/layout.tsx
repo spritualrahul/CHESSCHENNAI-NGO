@@ -4,6 +4,7 @@ import Script from "next/script";
 import { Footer } from "@/components/layout/footer";
 import { LoadingScreen } from "@/components/layout/loading-screen";
 import { Navbar } from "@/components/layout/navbar";
+import { RouteScrollReset } from "@/components/layout/route-scroll-reset";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${playfair.variable} ${caveat.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-[var(--ches-warm-white)] font-sans text-[var(--ches-charcoal)]">
+        <RouteScrollReset />
         <LoadingScreen />
         <Navbar />
         <main>{children}</main>
