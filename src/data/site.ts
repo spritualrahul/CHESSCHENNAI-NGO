@@ -45,8 +45,8 @@ export const site = {
   fullName: "Community Health Education Society",
   tagline: "Health, education and hope for vulnerable children.",
   url: "https://cheschennai.org",
-  email: "info@ches.org.in",
-  phone: "+91 44 2836 1399 / 2836 2994",
+  email: "ches_cheschennai@yahoo.co.in / pmanorama54@gmail.com",
+  phone: "044 - 24726655 / 044 - 24731283 / 9940033249",
   address: "No. 2, McNichols Road, Chetpet, Chennai - 600 031, India",
 };
 

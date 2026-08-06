@@ -235,10 +235,10 @@ export function DonationForm() {
               </span>
               <span>
                 Kindly share the payment receipt with us on{" "}
-                <a className="font-semibold text-[var(--ches-blue)]" href="mailto:info@ches.org.in">
-                  info@ches.org.in
+                <a className="font-semibold text-[var(--ches-blue)]" href="mailto:ches_cheschennai@yahoo.co.in">
+                  ches_cheschennai@yahoo.co.in
                 </a>{" "}
-                for acknowledgement.
+                or pmanorama54@gmail.com for acknowledgement.
               </span>
             </p>
           </div>

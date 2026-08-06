@@ -1,69 +1,40 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Building2,
-  CheckCircle2,
+  BadgeCheck,
   Clock3,
   Heart,
+  HeartHandshake,
   Mail,
   MapPin,
-  MessageCircle,
   Navigation,
   Phone,
-  Send,
   ShieldCheck,
   Sparkles,
-  UsersRound,
+  type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 import { site } from "@/data/site";
 
-const contactCards = [
-  {
-    icon: MapPin,
-    title: "Visit Us",
-    lines: ["No. 2, McNichols Road,", "Chetpet, Chennai – 600 031,", "Tamil Nadu, India"],
-    accent: "navy",
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    lines: ["+91 44 2836 1904", "+91 44 2836 2994"],
-    accent: "orange",
-  },
-  {
-    icon: Mail,
-    title: "Email Us",
-    lines: [site.email, "programs@ches.org.in"],
-    accent: "navy",
-  },
-  {
-    icon: Clock3,
-    title: "Working Hours",
-    lines: ["Mon – Sat: 9:30 AM – 6:30 PM", "Sunday: Closed"],
-    accent: "orange",
-  },
-] as const;
-
 const trustItems = [
+  { icon: ShieldCheck, title: "Give with confidence", body: "Your support is handled with care and transparency." },
+  { icon: HeartHandshake, title: "Join the work", body: "Connect with our team about partnerships and programmes." },
+  { icon: BadgeCheck, title: "Make an impact", body: "Every conversation can help a child move forward." },
+];
+
+const donorAssurances = [
   { icon: ShieldCheck, title: "Secure Donations", body: "100% safe and secure donations" },
-  { icon: Building2, title: "Transparent Impact", body: "Regular updates on how your support helps" },
-  { icon: MessageCircle, title: "Tax Benefits", body: "80G certified. Avail tax exemptions." },
-  { icon: UsersRound, title: "Trusted NGO", body: "30+ years of trust and compassion" },
+  { icon: HeartHandshake, title: "Transparent Impact", body: "Regular updates on how your support helps" },
+  { icon: BadgeCheck, title: "Trusted NGO", body: "30+ years of trust and compassion" },
 ];
 
 export function ContactPageContent() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitted(true);
-  }
+  const [activeContact, setActiveContact] = useState<string | null>(null);
 
   return (
     <main className="contact-page overflow-hidden bg-[#fffdf9] text-[#102433]">
@@ -96,98 +67,76 @@ export function ContactPageContent() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto -mt-9 max-w-[1180px] px-5">
-        <div className="grid overflow-hidden rounded-[1.4rem] border border-[#e8dfd3] bg-[#fffaf2] shadow-[0_18px_48px_rgb(10_34_43/0.12)] md:grid-cols-2 xl:grid-cols-4">
-          {contactCards.map((card) => (
-            <div key={card.title} className="flex min-h-[142px] items-start gap-4 border-b border-[#eadfd2] px-6 py-6 last:border-0 md:border-r md:[&:nth-child(2n)]:border-r-0 xl:border-b-0 xl:[&:nth-child(2n)]:border-r xl:last:border-r-0">
-              <span className={`grid size-12 shrink-0 place-items-center rounded-full text-white ${card.accent === "orange" ? "bg-[#e58218]" : "bg-[#003b53]"}`}>
-                <card.icon className="size-6" />
-              </span>
-              <div>
-                <h2 className="text-base font-bold">{card.title}</h2>
-                <div className="mt-2 grid gap-1 text-xs leading-5 text-[#17262e]/76">
-                  {card.lines.map((line) => <p key={line}>{line}</p>)}
+      <section className="relative z-10 mx-auto -mt-12 max-w-[1180px] px-5 pb-14 md:-mt-16 md:pb-20">
+        <div className="overflow-hidden rounded-[1.5rem] border border-[#dce7e3] bg-white shadow-[0_22px_60px_rgb(10_34_43/0.14)]">
+          <div className="grid lg:grid-cols-[1.05fr_.95fr]">
+            <div className="relative overflow-hidden bg-[#003b53] p-7 text-white md:p-11">
+              <div className="absolute -right-20 -top-24 size-64 rounded-full border border-white/10" />
+              <div className="absolute -bottom-32 -left-20 size-72 rounded-full border border-[#ef7b12]/25" />
+              <div className="relative">
+                <p className="eyebrow text-[#ffae42]">A direct line to care</p>
+                <h2 className="mt-3 max-w-[510px] font-heading text-4xl font-semibold leading-[1.04] md:text-[3.35rem]">Every conversation can open a door to hope.</h2>
+                <p className="mt-5 max-w-[500px] text-sm leading-7 text-white/78 md:text-base">Whether you are planning a donation, exploring a partnership or simply want to understand our work, our team is ready to speak with you.</p>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  <ContactAction icon={Phone} label="Call CHES" href="tel:04424726655" value="044 - 24726655" onActivate={() => setActiveContact("phone")} active={activeContact === "phone"} />
+                  <ContactAction icon={Mail} label="Email CHES" href="mailto:ches_cheschennai@yahoo.co.in" value="ches_cheschennai@yahoo.co.in" onActivate={() => setActiveContact("email")} active={activeContact === "email"} />
+                </div>
+                <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/70">
+                  <span className="font-extrabold uppercase tracking-[0.12em] text-[#ffae42]">Other office lines</span>
+                  <a href="tel:04424731283" className="transition hover:text-[#ffae42]">044 - 24731283</a>
+                  <a href="tel:9940033249" className="transition hover:text-[#ffae42]">9940033249</a>
+                </div>
+
+                <div className="mt-7 rounded-xl border border-white/15 bg-white/8 p-4">
+                  <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[#ffae42]">Call Dr. P. Manorama</p>
+                  <p className="mt-2 text-sm font-bold text-white">MD; DCH; DM(Gastro)</p>
+                  <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-white/78">
+                    <a href="tel:+919444077177" className="transition hover:text-[#ffae42]">+91 - 9444077177</a>
+                    <a href="mailto:pmanorama54@gmail.com" className="transition hover:text-[#ffae42]">pmanorama54@gmail.com</a>
+                  </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      <section className="px-5 py-8 md:py-14">
-        <div className="mx-auto grid max-w-[1180px] overflow-hidden rounded-[1.4rem] border border-[#eee7df] bg-[#fffdf9] shadow-[0_12px_42px_rgb(17_41_50/0.06)] lg:grid-cols-[1fr_1fr]">
-          <div className="p-7 md:p-10 lg:p-12">
-            <p className="eyebrow text-[#e66f10]">Let&apos;s talk</p>
-            <h2 className="mt-2 font-heading text-4xl font-semibold leading-tight md:text-[2.8rem]">Send Us a Message</h2>
-            <span className="mt-3 block h-0.5 w-10 bg-[#e66f10]" />
-            <p className="mt-6 text-sm leading-6 text-[#182a34]/85">Have a question or want to get involved?<br />Fill out the form and our team will get back to you.</p>
-
-            <form className="mt-6 grid gap-2.5" onSubmit={handleSubmit}>
-              <label className="sr-only" htmlFor="contact-name">Your Name</label>
-              <input id="contact-name" name="name" required placeholder="Your Name *" className="contact-field" />
-              <label className="sr-only" htmlFor="contact-email">Your Email</label>
-              <input id="contact-email" name="email" required type="email" placeholder="Your Email *" className="contact-field" />
-              <label className="sr-only" htmlFor="contact-phone">Phone Number</label>
-              <input id="contact-phone" name="phone" placeholder="Phone Number" className="contact-field" />
-              <label className="sr-only" htmlFor="contact-topic">I want to connect about</label>
-              <select id="contact-topic" name="topic" defaultValue="" className="contact-field appearance-none">
-                <option value="" disabled>I want to connect about...</option>
-                <option>Volunteering</option>
-                <option>Donations</option>
-                <option>Partnerships</option>
-                <option>Program enquiries</option>
-              </select>
-              <label className="sr-only" htmlFor="contact-message">Your Message</label>
-              <textarea id="contact-message" name="message" required placeholder="Your Message *" className="contact-field min-h-[112px] resize-y" />
-              <label className="mt-1 flex items-start gap-2 text-xs leading-5 text-[#182a34]/78">
-                <input type="checkbox" required className="mt-1 size-4 accent-[#e66f10]" />
-                <span>I agree to the <Link href="#privacy" className="text-[#e66f10]">Privacy Policy</Link> and <Link href="#terms" className="text-[#e66f10]">Terms of Use.</Link></span>
-              </label>
-              <div className="mt-2 flex items-center justify-between gap-4">
-                <button type="submit" className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#003b53] px-5 text-sm font-bold text-white transition hover:bg-[#00506c]">
-                  <Send className="size-4" /> Send Message
-                </button>
-                <AnimatePresence mode="wait">
-                  {submitted ? (
-                    <motion.p initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-1.5 text-xs font-semibold text-[#47785b]">
-                      <CheckCircle2 className="size-4" /> Thanks, we&apos;ll be in touch.
-                    </motion.p>
-                  ) : null}
-                </AnimatePresence>
+            <div className="bg-[#fffaf2] p-7 md:p-11">
+              <div className="relative h-36 overflow-hidden rounded-xl bg-[#dbe9e3]">
+                <Image src="/Assets/About/ches-children-care.jpeg" alt="Children receiving care and support through CHES" fill className="object-cover object-center" sizes="(min-width: 1024px) 40vw, 100vw" />
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,59,83,.82),rgba(0,59,83,.08))]" />
+                <div className="absolute inset-x-5 bottom-4">
+                  <p className="font-script text-3xl font-semibold text-white">Come and meet the work.</p>
+                </div>
               </div>
-            </form>
+              <div className="mt-7 flex items-center gap-3">
+                <span className="grid size-11 place-items-center rounded-full bg-[#e58218] text-white"><MapPin className="size-5" /></span>
+                <div>
+                  <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-[#e58218]">Visit Us</p>
+                  <h3 className="mt-1 font-heading text-2xl font-semibold text-[#003b53]">Our Chennai office</h3>
+                </div>
+              </div>
+              <p className="mt-5 text-sm font-bold leading-6 text-[#003b53]">{site.address}</p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                <ContactDetail icon={Clock3} label="Working hours" value="10 am to 5 pm" />
+                <ContactDetail icon={HeartHandshake} label="Office visits" value="All days in a week" />
+              </div>
+              <div className="mt-3 rounded-lg border border-[#e8d6bd] bg-white/75 p-3">
+                <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em] text-[#e58218]">Prior information</p>
+                <p className="mt-1 text-sm font-bold leading-5 text-[#003b53]">Mr. P. Muthupandian</p>
+                <a href="tel:+919791655519" className="mt-1 inline-block text-sm font-semibold text-[#003b53] transition hover:text-[#e58218]">+91 - 9791655519</a>
+              </div>
+              <a href="https://maps.google.com/?q=CHES+McNichols+Road+Chennai" target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#003b53] transition hover:text-[#e58218]">
+                Open directions <Navigation className="size-4" />
+              </a>
+            </div>
           </div>
 
-          <div className="border-t border-[#eee7df] p-7 md:p-10 lg:border-l lg:border-t-0 lg:p-12">
-            <p className="eyebrow text-[#e66f10]">Our Chennai office</p>
-            <h2 className="mt-2 font-heading text-4xl font-semibold leading-tight md:text-[2.8rem]">Find Us</h2>
-            <span className="mt-3 block h-0.5 w-10 bg-[#e66f10]" />
-            <div className="contact-map mt-6 overflow-hidden rounded-xl border border-[#e8e3dc]">
-              <div className="contact-map-labels" aria-hidden="true">
-                <span className="left-[12%] top-[28%]">Government College of Fine Arts</span>
-                <span className="left-[42%] top-[76%]">Chetpet</span>
-                <span className="right-[8%] top-[18%]">Chennai Central</span>
-                <span className="right-[10%] bottom-[24%] text-[#0a76c1]">Spencer Plaza</span>
+          <div className="grid border-t border-[#e2e9e5] bg-[#f7fbf8] sm:grid-cols-3">
+            {donorAssurances.map((item) => (
+              <div key={item.title} className="flex gap-3 border-b border-[#e2e9e5] p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 md:p-7">
+                <item.icon className="mt-0.5 size-7 shrink-0 text-[#e58218]" />
+                <div><h3 className="text-sm font-extrabold text-[#003b53]">{item.title}</h3><p className="mt-1 text-xs leading-5 text-[#102433]/65">{item.body}</p></div>
               </div>
-              <div className="contact-map-pin"><MapPin className="size-8 fill-[#003b53] text-[#003b53]" /></div>
-              <div className="contact-map-card">
-                <p className="font-bold">CHES</p>
-                <p className="mt-1 text-[10px] leading-4">No. 2, McNichols Road,<br />Chetpet, Chennai – 600 031,<br />Tamil Nadu, India</p>
-              </div>
-              <div className="contact-map-zoom" aria-hidden="true"><span>+</span><span>−</span></div>
-            </div>
-            <div className="mt-0 rounded-b-xl bg-[#003b53] p-6 text-white md:p-7">
-              <div className="flex gap-5">
-                <Building2 className="mt-1 size-10 shrink-0 text-[#ef7b12]" />
-                <div>
-                  <h3 className="font-heading text-2xl font-semibold">Our Office</h3>
-                  <p className="mt-3 text-sm leading-6 text-white/82">We&apos;d love to meet you! Visit our office to learn more about our programs, partnerships, or how you can help.</p>
-                  <a href="https://maps.google.com/?q=CHES+McNichols+Road+Chennai" target="_blank" rel="noreferrer" className="mt-5 inline-flex h-10 items-center gap-2 rounded-lg border border-[#e88118] px-4 text-xs font-bold text-white transition hover:bg-[#e88118]">
-                    Get Directions <Navigation className="size-4" />
-                  </a>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -195,7 +144,7 @@ export function ContactPageContent() {
       <section className="relative overflow-hidden border-y border-[#eadfce] bg-[#f8f0e2] px-5 py-0">
         <div className="mx-auto grid max-w-[1180px] items-center lg:grid-cols-[.8fr_1.05fr_1.2fr]">
           <div className="relative min-h-[290px] overflow-hidden lg:min-h-[305px]">
-            <Image src="/placeholders/contact-kindness-fresh.png" alt="A child caring for a young plant" fill className="object-cover object-left" sizes="(min-width: 1024px) 30vw, 100vw" />
+            <Image src="/Assets/Galary/Seed balls planting (4).jpeg" alt="CHES children planting a seedling together" fill className="object-cover object-center" sizes="(min-width: 1024px) 30vw, 100vw" />
           </div>
           <div className="py-9 lg:px-8">
             <h2 className="max-w-[330px] font-heading text-4xl font-semibold leading-[1.03] md:text-[2.55rem]">Your Kindness<br />Can Change a Life</h2>
@@ -216,5 +165,37 @@ export function ContactPageContent() {
         </div>
       </section>
     </main>
+  );
+}
+
+function ContactAction({
+  icon: Icon,
+  label,
+  href,
+  value,
+  onActivate,
+  active,
+}: {
+  icon: LucideIcon;
+  label: string;
+  href: string;
+  value: string;
+  onActivate: () => void;
+  active: boolean;
+}) {
+  return (
+    <a href={href} onClick={onActivate} className={`group min-w-0 rounded-xl border p-4 transition hover:-translate-y-0.5 hover:border-[#ffae42] ${active ? "border-[#ffae42] bg-white/14" : "border-white/15 bg-white/8"}`}>
+      <span className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-[#ffae42]"><Icon className="size-4" />{label}</span>
+      <span className="mt-2 block break-words text-sm font-bold leading-5 text-white group-hover:text-[#ffae42]">{value}</span>
+    </a>
+  );
+}
+
+function ContactDetail({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-[#e8d6bd] bg-white/75 p-3">
+      <div className="flex items-center gap-2 text-[#e58218]"><Icon className="size-4" /><p className="text-[0.68rem] font-extrabold uppercase tracking-[0.12em]">{label}</p></div>
+      <p className="mt-2 text-sm font-bold leading-5 text-[#003b53]">{value}</p>
+    </div>
   );
 }
