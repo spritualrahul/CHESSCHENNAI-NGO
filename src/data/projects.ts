@@ -149,8 +149,8 @@ export const chesProjects: ChesProject[] = [
       "CHES pioneered prevention and support work among women in prostitution, helping communities access information, testing, treatment and compassionate care while reducing stigma.",
     detailIntro:
       "This pioneering past project focused on STI and HIV prevention among women in prostitution, combining awareness, testing referrals, treatment linkage, counselling and community support. It helped vulnerable women access care with dignity and reduced stigma around HIV prevention.",
-    image: "/Assets/About/ches-children-meal.jpeg",
-    imageAlt: "Women and children participating in a CHES community activity",
+    image: "/Assets/Galary/STI.jpeg",
+    imageAlt: "CHES STI and HIV prevention community outreach session",
     achievements: [
       "Community-based prevention and awareness",
       "Supported access to HIV testing and care",

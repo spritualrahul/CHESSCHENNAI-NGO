@@ -8,9 +8,9 @@ import { introParagraphs, originStory, principles, storyImages, visionMission } 
 
 function ChapterLabel({ number, message }: { number: string; message: string }) {
   return (
-    <div className="flex items-start gap-4">
+    <div className="flex items-center gap-4">
       <span className="chapter-number">{number}</span>
-      <p className="chapter-message max-w-[330px] pt-1">{message}</p>
+      <p className="chapter-message max-w-[330px]">{message}</p>
     </div>
   );
 }
