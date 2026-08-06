@@ -108,12 +108,21 @@ export async function DonationForm() {
 
           <div id="bank-details" className="mt-9 grid scroll-mt-24 items-start gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(310px,.72fr)]">
             <div>
-              <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-b border-[#dedfd4] pb-3">
-                <div>
+              <div className="mb-4">
+                <div className="border-b border-[#dedfd4] pb-3">
                   <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-[#b5780d]">Secure bank transfer</p>
                   <h3 className="mt-1 font-heading text-2xl font-semibold text-[#063d39]">Choose the correct account</h3>
                 </div>
-                <p className="max-w-xs text-xs leading-5 text-[#5a6863]">Use the local account for donations within India and the overseas account for international transfers.</p>
+                <div className="mt-3 grid overflow-hidden rounded-lg border border-[#dfe7df] bg-[#f7faf7] sm:grid-cols-2">
+                  <div className="flex items-center gap-3 border-b border-[#dfe7df] px-4 py-3 sm:border-b-0 sm:border-r">
+                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#e3efe7] text-[#246247]"><Landmark className="size-4" strokeWidth={1.8} /></span>
+                    <p className="text-xs leading-5 text-[#53635d]"><strong className="block font-extrabold text-[#123f38]">Donating within India</strong>Use the Local Fund Transfer account.</p>
+                  </div>
+                  <div className="flex items-center gap-3 px-4 py-3">
+                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#faecd1] text-[#b5780d]"><Landmark className="size-4" strokeWidth={1.8} /></span>
+                    <p className="text-xs leading-5 text-[#53635d]"><strong className="block font-extrabold text-[#6f4a09]">Donating internationally</strong>Use the Overseas Fund Transfer account.</p>
+                  </div>
+                </div>
               </div>
               <div className="grid gap-5 xl:grid-cols-2">
                 <BankDetailsCard id="local-bank" title="CHES Banking Details" subtitle="Local Fund Transfer" rows={localBankRows} tone="teal" />
