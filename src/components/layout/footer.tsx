@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, LockKeyhole, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -124,7 +124,13 @@ export function Footer() {
       </div>
       <div className="mx-auto flex max-w-6xl flex-col gap-2 pt-5 text-[0.68rem] text-[var(--ches-muted)] md:flex-row md:items-center md:justify-between">
         <p>© {new Date().getFullYear()} {site.fullName}. All Rights Reserved.</p>
-        <p>Privacy Policy | Terms of Use</p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <p>Privacy Policy | Terms of Use</p>
+          <Link href="/admin/login" className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[#dce7e1] bg-[#f7fbf8] px-3 text-[0.72rem] font-extrabold text-[var(--ches-green)] transition hover:border-[var(--ches-green)] hover:bg-[#eef7f0] hover:text-[var(--ches-blue)]">
+            <LockKeyhole className="size-3.5" />
+            Admin Login
+          </Link>
+        </div>
       </div>
     </footer>
   );

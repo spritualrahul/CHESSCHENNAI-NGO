@@ -13,6 +13,7 @@ import Image from "next/image";
 import * as QRCode from "qrcode";
 import type { ReactNode } from "react";
 
+import { DonationPaymentFlow } from "@/components/sections/donation-payment-flow";
 import { donationDetails } from "@/data/site";
 
 const heroImage = "/Assets/donation-hero-watercolor.jpg";
@@ -67,6 +68,7 @@ export async function DonationForm() {
     width: 300,
     color: { dark: "#073f3b", light: "#ffffff" },
   });
+  const panRequired = process.env.DONATION_REQUIRE_PAN === "true";
 
   return (
     <div className="overflow-hidden bg-[#fffefa] text-[#122d2d]">
@@ -106,35 +108,28 @@ export async function DonationForm() {
             </div>
           </div>
 
-          <div id="bank-details" className="mt-9 grid scroll-mt-24 items-start gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(310px,.72fr)]">
-            <div>
-              <div className="mb-4">
-                <div className="border-b border-[#dedfd4] pb-3">
-                  <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-[#b5780d]">Secure bank transfer</p>
-                  <h3 className="mt-1 font-heading text-2xl font-semibold text-[#063d39]">Choose the correct account</h3>
-                </div>
-                <div className="mt-3 grid overflow-hidden rounded-lg border border-[#dfe7df] bg-[#f7faf7] sm:grid-cols-2">
-                  <div className="flex items-center gap-3 border-b border-[#dfe7df] px-4 py-3 sm:border-b-0 sm:border-r">
-                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#e3efe7] text-[#246247]"><Landmark className="size-4" strokeWidth={1.8} /></span>
-                    <p className="text-xs leading-5 text-[#53635d]"><strong className="block font-extrabold text-[#123f38]">Donating within India</strong>Use the Local Fund Transfer account.</p>
-                  </div>
-                  <div className="flex items-center gap-3 px-4 py-3">
-                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#faecd1] text-[#b5780d]"><Landmark className="size-4" strokeWidth={1.8} /></span>
-                    <p className="text-xs leading-5 text-[#53635d]"><strong className="block font-extrabold text-[#6f4a09]">Donating internationally</strong>Use the Overseas Fund Transfer account.</p>
-                  </div>
-                </div>
+          <DonationPaymentFlow panRequired={panRequired} qrSource={qrSource} upiId={donationDetails.upiId} upiPaymentUrl={upiPaymentUrl} />
+
+          <div id="bank-details" className="mt-10 scroll-mt-24">
+            <div className="mb-4">
+              <div className="border-b border-[#dedfd4] pb-3">
+                <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-[#b5780d]">Secure bank transfer</p>
+                <h3 className="mt-1 font-heading text-2xl font-semibold text-[#063d39]">Choose the correct account</h3>
               </div>
-              <div className="grid gap-5 xl:grid-cols-2">
-                <BankDetailsCard id="local-bank" title="CHES Banking Details" subtitle="Local Fund Transfer" rows={localBankRows} tone="teal" />
-                <BankDetailsCard title="CHES Banking Details" subtitle="for International / Overseas Fund Transfer" rows={internationalBankRows} tone="gold" />
+              <div className="mt-3 grid overflow-hidden rounded-lg border border-[#dfe7df] bg-[#f7faf7] sm:grid-cols-2">
+                <div className="flex items-center gap-3 border-b border-[#dfe7df] px-4 py-3 sm:border-b-0 sm:border-r">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#e3efe7] text-[#246247]"><Landmark className="size-4" strokeWidth={1.8} /></span>
+                  <p className="text-xs leading-5 text-[#53635d]"><strong className="block font-extrabold text-[#123f38]">Donating within India</strong>Use the Local Fund Transfer account.</p>
+                </div>
+                <div className="flex items-center gap-3 px-4 py-3">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#faecd1] text-[#b5780d]"><Landmark className="size-4" strokeWidth={1.8} /></span>
+                  <p className="text-xs leading-5 text-[#53635d]"><strong className="block font-extrabold text-[#6f4a09]">Donating internationally</strong>Use the Overseas Fund Transfer account.</p>
+                </div>
               </div>
             </div>
-            <div>
-              <div className="mb-4 border-b border-[#dedfd4] pb-3">
-                <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-[#b5780d]">Instant donation</p>
-                <h3 className="mt-1 font-heading text-2xl font-semibold text-[#063d39]">Scan securely with UPI</h3>
-              </div>
-              <PaymentQrCard source={qrSource} />
+            <div className="grid gap-5 xl:grid-cols-2">
+              <BankDetailsCard id="local-bank" title="CHES Banking Details" subtitle="Local Fund Transfer" rows={localBankRows} tone="teal" />
+              <BankDetailsCard title="CHES Banking Details" subtitle="for International / Overseas Fund Transfer" rows={internationalBankRows} tone="gold" />
             </div>
           </div>
           <p className="mt-4 flex items-start gap-2 rounded-lg bg-[#edf5ef] px-4 py-3 text-xs leading-5 text-[#1c453f]"><Mail className="mt-0.5 size-4 shrink-0 text-[#d68d10]" /><span>Kindly share the payment receipt with <a className="font-extrabold underline underline-offset-2" href="mailto:ches_cheschennai@yahoo.co.in">ches_cheschennai@yahoo.co.in</a> or <a className="font-extrabold underline underline-offset-2" href="mailto:pmanorama54@gmail.com">pmanorama54@gmail.com</a> for acknowledgement.</span></p>
@@ -198,48 +193,6 @@ function BankDetailsCard({ id, title, subtitle, rows, tone }: { id?: string; tit
       {!isGold ? <p className="mx-5 mb-5 flex items-center gap-2 rounded-md bg-[#eef6ef] px-3 py-2 text-[0.68rem] font-medium text-[#24533d]"><CheckCircle2 className="size-4 shrink-0" /> All donations are eligible for tax benefits under 80G.</p> : null}
     </article>
   );
-}
-
-function PaymentQrCard({ source }: { source: string }) {
-  return (
-    <section className="relative overflow-hidden rounded-xl border border-[#ecd9b1] bg-[#fff8e9] text-center shadow-[0_14px_32px_rgb(89_64_24/0.09)]">
-      <div className="absolute -right-10 -top-10 size-28 rounded-full bg-[#d68d10]/10" />
-      <div className="absolute -bottom-14 -left-12 size-32 rounded-full bg-[#063d39]/8" />
-      <div className="relative bg-[#2d52a2] px-5 py-3 text-white">
-        <div className="mx-auto flex max-w-64 items-center justify-center gap-3">
-          <span className="grid size-8 place-items-center rounded-full bg-[#f0cf39] font-heading text-lg font-bold text-[#2d52a2]">IB</span>
-          <div className="text-left">
-            <p className="text-sm font-extrabold leading-none">Indian Bank</p>
-            <p className="mt-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] text-white/78">UPI Donation</p>
-          </div>
-        </div>
-      </div>
-      <div className="relative px-6 py-6">
-        <Heart className="absolute right-5 top-4 size-8 fill-[#d68d10] text-[#d68d10]" strokeWidth={1.2} />
-        <p className="mx-auto max-w-60 text-[0.7rem] font-extrabold uppercase tracking-[0.12em] text-[#063d39]/70">Community Health Education Society</p>
-        <h3 className="mt-3 font-heading text-2xl font-semibold text-[#063d39]">Scan &amp; Pay</h3>
-        <p className="mx-auto mt-2 max-w-56 text-xs leading-5 text-[#263937]">Scan the QR code using any UPI app to make a secure donation.</p>
-        <div className="mx-auto mt-4 w-fit rounded-xl border border-[#efe1c5] bg-white p-3 shadow-[0_10px_22px_rgb(31_42_41/0.12)]">
-          <QrArt source={source} />
-        </div>
-        <p className="mt-3 text-xs font-extrabold text-[#063d39]">UPI ID: {donationDetails.upiId}</p>
-        <a href={upiPaymentUrl} className="mt-3 inline-flex items-center justify-center gap-2 rounded-full border border-[#d9bd83] bg-white px-4 py-2 text-xs font-extrabold text-[#a26806] transition hover:border-[#063d39] hover:text-[#063d39]">
-          Open UPI app <ScanLine className="size-4" />
-        </a>
-        <div className="mx-auto mt-4 h-px max-w-56 bg-[#ead9b8]" />
-        <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-          <Image src="/Assets/payment-logos/google-pay.svg" alt="Google Pay" width={65} height={22} className="h-6 w-[65px] object-contain" />
-          <Image src="/Assets/payment-logos/paytm.svg" alt="Paytm" width={60} height={22} className="h-6 w-[60px] object-contain" />
-          <Image src="/Assets/payment-logos/phonepe.svg" alt="PhonePe" width={72} height={25} className="h-7 w-[72px] object-contain" />
-          <Image src="/Assets/payment-logos/bhim.svg" alt="BHIM UPI" width={74} height={22} className="h-6 w-[74px] object-contain" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function QrArt({ source }: { source: string }) {
-  return <div className="relative size-44 overflow-hidden bg-white sm:size-48"><Image src={source} alt={`Scannable CHES UPI QR code for ${donationDetails.upiId}`} fill unoptimized className="object-contain" sizes="192px" /></div>;
 }
 
 function SupportHandsIcon() {
