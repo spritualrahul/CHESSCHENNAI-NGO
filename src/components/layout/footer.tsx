@@ -1,16 +1,12 @@
-"use client";
-
 import { ArrowRight, LockKeyhole, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 import { footerSocials } from "@/data/home";
 import { navItems, site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
-export function Footer() {
-  const pathname = usePathname();
+export function FooterContent({ pathname }: { pathname: string }) {
   const isContact = pathname === "/contact";
 
   return (

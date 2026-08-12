@@ -1,25 +1,24 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import type { HTMLMotionProps } from "framer-motion";
-
 import { cn } from "@/lib/utils";
+import { FadeIn } from "@/components/shared/fade-in";
+import type { ReactNode } from "react";
 
-type AnimatedSectionProps = HTMLMotionProps<"section">;
+type AnimatedSectionProps = {
+  children: ReactNode;
+  className?: string;
+  id?: string;
+};
 
-export function AnimatedSection({ className, children, ...props }: AnimatedSectionProps) {
-  const prefersReducedMotion = useReducedMotion();
-
+/**
+ * Backwards-compatible AnimatedSection using the lightweight FadeIn component.
+ * Drop-in replacement for the old framer-motion version.
+ */
+export function AnimatedSection({ className, children, id, ...props }: AnimatedSectionProps) {
   return (
-    <motion.section
-      className={cn("section-shell", className)}
-      initial={prefersReducedMotion ? false : { opacity: 0, y: 34 }}
-      whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-12% 0px" }}
-      transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-      {...props}
-    >
+    <FadeIn as="section" className={cn("section-shell", className)}>
+      {id ? <span id={id} className="absolute -mt-24" /> : null}
       {children}
-    </motion.section>
+    </FadeIn>
   );
 }

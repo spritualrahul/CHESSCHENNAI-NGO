@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Caveat, Inter, Playfair_Display } from "next/font/google";
 import Script from "next/script";
-import { Footer } from "@/components/layout/footer";
-import { LoadingScreen } from "@/components/layout/loading-screen";
+import { FooterShell } from "@/components/layout/footer-shell";
 import { Navbar } from "@/components/layout/navbar";
 import { RouteScrollReset } from "@/components/layout/route-scroll-reset";
 import { site } from "@/data/site";
@@ -72,10 +71,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full bg-[var(--ches-warm-white)] font-sans text-[var(--ches-charcoal)]">
         <RouteScrollReset />
-        <LoadingScreen />
         <Navbar />
         <main>{children}</main>
-        <Footer />
+        <FooterShell />
         <Script
           id="ches-schema"
           type="application/ld+json"

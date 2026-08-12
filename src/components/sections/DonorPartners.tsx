@@ -1,8 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
 
+import { MotionFadeIn } from "@/components/shared/motion-wrappers";
 import { donors } from "@/data/donors";
 
 export function DonorPartners() {
@@ -11,18 +9,12 @@ export function DonorPartners() {
 
   return (
     <section className="overflow-hidden border-y border-[#e7eceb] bg-[linear-gradient(180deg,#ffffff_0%,#fffaf1_48%,#ffffff_100%)] py-12 md:py-14">
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-6% 0px" }}
-        transition={{ duration: 0.45 }}
-        className="mx-auto max-w-6xl px-5 text-center"
-      >
+      <MotionFadeIn className="mx-auto max-w-6xl px-5 text-center">
         <p className="font-heading text-3xl font-semibold text-[var(--ches-blue)] md:text-4xl">Trusted by Leading Organizations</p>
         <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-[var(--ches-muted)]">
           For over three decades, CHES has worked alongside respected organizations committed to improving children&apos;s lives.
         </p>
-      </motion.div>
+      </MotionFadeIn>
 
       <div className="relative mt-9 w-full space-y-4">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white via-white/85 to-transparent md:w-28" />

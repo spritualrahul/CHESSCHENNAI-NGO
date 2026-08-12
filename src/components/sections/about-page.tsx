@@ -1,12 +1,10 @@
-"use client";
-
 import { ArrowRight, Heart, Quote } from "lucide-react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { CtaBand } from "@/components/shared/cta-band";
+import { MotionArticle } from "@/components/shared/motion-wrappers";
 import {
   aboutHero,
   aboutStats,
@@ -103,7 +101,7 @@ function ProgressSection() {
         <div className="relative">
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {progressCards.map((card) => (
-              <motion.article key={card.period} whileHover={{ y: -5 }} className="overflow-hidden rounded-xl border border-[#e1e7e5] bg-white shadow-[0_8px_20px_rgb(11_78_109/0.05)]">
+              <article key={card.period} className="overflow-hidden rounded-xl border border-[#e1e7e5] bg-white shadow-[0_8px_20px_rgb(11_78_109/0.05)] transition hover:-translate-y-1">
                 <div className="relative aspect-[1.55]">
                   <Image src={card.image} alt={card.alt} fill sizes="(min-width: 1280px) 18vw, (min-width: 640px) 42vw, 90vw" className="object-cover" />
                 </div>
@@ -112,7 +110,7 @@ function ProgressSection() {
                   <h3 className="mt-1 min-h-10 text-xs font-bold leading-4 text-[var(--ches-ink)]">{card.title}</h3>
                   <p className="mt-3 text-[0.68rem] leading-4 text-[var(--ches-muted)]">{card.text}</p>
                 </div>
-              </motion.article>
+              </article>
             ))}
           </div>
           <div className="mt-4 hidden items-center px-6 xl:flex">
@@ -174,11 +172,11 @@ function MilestonesSection() {
         </div>
         <div className="relative space-y-3 pl-9 before:absolute before:bottom-4 before:left-4 before:top-4 before:w-px before:bg-[#bdd0d8]">
           {milestones.map((item, index) => (
-            <motion.article key={item.year} initial={{ opacity: 0, x: 12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-8% 0px" }} transition={{ duration: .35, delay: index * .04 }} className="relative flex items-center gap-4 rounded-xl border border-[#e2e8e6] bg-white p-3 shadow-[0_5px_18px_rgb(11_78_109/0.04)]">
+            <MotionArticle key={item.year} index={index} className="relative flex items-center gap-4 rounded-xl border border-[#e2e8e6] bg-white p-3 shadow-[0_5px_18px_rgb(11_78_109/0.04)]">
               <span className={`absolute -left-[3.25rem] grid size-9 place-items-center rounded-full font-heading text-sm font-semibold text-white ${index % 2 === 0 ? "bg-[var(--ches-blue)]" : "bg-[var(--ches-orange)]"}`}>{item.year}</span>
               <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#eff6f5] text-[var(--ches-blue)]"><item.icon className="size-5" /></span>
               <div><h3 className="text-sm font-bold text-[var(--ches-ink)]">{item.title}</h3><p className="mt-1 text-xs leading-4 text-[var(--ches-muted)]">{item.text}</p></div>
-            </motion.article>
+            </MotionArticle>
           ))}
         </div>
       </div>
@@ -193,11 +191,11 @@ function ImpactAreasSection() {
         <p className="text-center text-xs font-bold uppercase tracking-[0.16em] text-[var(--ches-orange)]">Our Impact Areas</p>
         <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {impactAreas.map((area) => (
-            <motion.article key={area.title} whileHover={{ y: -4 }} className="rounded-xl border border-[#e1e7e5] bg-white p-5 shadow-[0_8px_24px_rgb(11_78_109/0.04)]">
+            <article key={area.title} className="rounded-xl border border-[#e1e7e5] bg-white p-5 shadow-[0_8px_24px_rgb(11_78_109/0.04)] transition hover:-translate-y-1">
               <span className={`grid size-10 place-items-center rounded-full ${impactTones[area.tone]}`}><area.icon className="size-5" /></span>
               <h3 className="mt-4 text-sm font-bold text-[var(--ches-ink)]">{area.title}</h3>
               <p className="mt-3 text-xs leading-5 text-[var(--ches-muted)]">{area.text}</p>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>
