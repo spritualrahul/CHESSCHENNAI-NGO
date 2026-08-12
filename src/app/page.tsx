@@ -1,6 +1,7 @@
 import { CtaBand } from "@/components/shared/cta-band";
 import { DonorPartners } from "@/components/sections/DonorPartners";
 import { HeroCarousel } from "@/components/sections/hero-carousel";
+import { HomeVisitorCounter } from "@/components/sections/home-visitor-counter";
 import {
   IntroSectionFour,
   IntroSectionOne,
@@ -12,6 +13,7 @@ export default function HomePage() {
   return (
     <>
       <HeroCarousel />
+      <HomeVisitorCounter />
       <IntroSectionOne />
       <IntroSectionTwo />
       <IntroSectionThree />

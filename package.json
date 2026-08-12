@@ -7,7 +7,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "db:migrate": "psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f database/migrations/001_create_donations.sql",
+    "db:migrate": "for migration in database/migrations/*.sql; do psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f \"$migration\"; done",
     "admin:credentials": "node scripts/generate-admin-credentials.mjs"
   },
   "dependencies": {
