@@ -42,15 +42,13 @@ export const metadata: Metadata = {
       "Support vulnerable children through health, education, shelter and family care.",
     url: site.url,
     siteName: site.fullName,
-    images: [{ url: "/Assets/Galary/06367698-b922-469b-a84b-268e6e1edade.jpg", width: 1600, height: 1200 }],
     locale: "en_IN",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: `${site.fullName} | Hope for Children and Families`,
     description: "Health, education and hope for vulnerable children.",
-    images: ["/Assets/Galary/06367698-b922-469b-a84b-268e6e1edade.jpg"],
   },
 };
 

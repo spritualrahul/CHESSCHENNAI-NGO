@@ -14,8 +14,8 @@ export const aboutHero = {
   title: "About Us",
   body: "Three decades of compassion, innovation and impact in the lives of children, women and communities.",
   promise: "Every Child. Every Right. Every Chance.",
-  image: "/Assets/Galary/06367698-b922-469b-a84b-268e6e1edade.jpg",
-  alt: "Children holding soft toys together at a CHES home",
+  image: "/Assets/new images/DSC_0482.JPG",
+  alt: "Children, caregivers and guests celebrating together at CHES",
 };
 
 export const aboutStats = [
@@ -37,30 +37,30 @@ export const progressCards = [
     period: "1996–2004",
     title: "Expanding & Reaching The Unreached",
     text: "Pioneered HIV prevention, outreach, transgender inclusion and home-based care initiatives.",
-    image: "/Assets/About/ches-children-care.jpeg",
-    alt: "Children gathered around a learning activity",
+    image: "/Assets/new images/6.jpg",
+    alt: "An archival gathering of children and caregivers in the early CHES years",
   },
   {
     period: "2005–2014",
     title: "Strengthening Systems & Child Care",
     text: "Launched paediatric ART, foster care, child protection programs and scaled community impact.",
-    image: "/Assets/About/ches-children-meal.jpeg",
-    alt: "Children sharing a meal together",
+    image: "/Assets/new images/8.jpg",
+    alt: "Children taking part in a creative indoor learning session",
   },
   {
     period: "2015–2025",
     title: "Transforming Lives at Scale",
     text: "Holistic programs in health, education, protection and livelihood empowering thousands of lives.",
-    image: "/Assets/Galary/PHOTO-2025-02-22-10-19-17.jpg",
-    alt: "Children and caregivers celebrating together",
+    image: "/Assets/new images/DSC_0477.JPG",
+    alt: "Children welcoming guests with balloons at a CHES event",
   },
 ];
 
 export const journeyIntro = {
   eyebrow: "Since 1994",
   title: "A Journey of Compassion, Innovation and Impact",
-  image: "/Assets/About/ches-founder-child.jpeg",
-  alt: "Dr. Manorama with a child at a CHES home",
+  image: "/Assets/new images/4.jpg",
+  alt: "Children seated in a caring circle with a CHES volunteer",
   paragraphs: [
     "The Community Health Education Society (CHES) was founded in 1994 with a simple yet powerful mission—to care for two HIV-positive orphans who had nowhere to go. What began as a small act of compassion steadily evolved into a pioneering movement addressing HIV, child protection, gender equity, and community well-being across Tamil Nadu and beyond.",
   ],

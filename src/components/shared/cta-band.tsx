@@ -7,15 +7,21 @@ import { storyImages } from "@/data/home";
 type CtaBandProps = {
   title?: string;
   body?: string;
+  image?: {
+    src: string;
+    alt: string;
+    position?: string;
+  };
 };
 
 export function CtaBand({
   title = "Your Kindness Can Change a Child's Tomorrow",
   body = "Every contribution helps provide education, healthcare, protection, and hope to children who need it most.",
+  image = storyImages.cta,
 }: CtaBandProps) {
   return (
     <section className="relative overflow-hidden bg-[var(--ches-blue)] px-5 py-12 text-white md:py-14">
-      <Image src={storyImages.cta.src} alt="Children smiling together at a CHES home" fill className="object-cover object-center opacity-45" sizes="100vw" />
+      <Image src={image.src} alt={image.alt} fill className="object-cover opacity-45" style={{ objectPosition: image.position }} sizes="100vw" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,47,65,.98),rgba(7,47,65,.88)_42%,rgba(7,47,65,.26))]" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[1.1fr_.9fr]">
         <div>

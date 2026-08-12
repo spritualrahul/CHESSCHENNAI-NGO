@@ -42,7 +42,15 @@ export function AboutPageContent() {
       <FullJourneySection />
       <FounderSection />
       <GovernanceSection />
-      <CtaBand title="Be a part of our journey." body="Your support today can change a child's tomorrow." />
+      <CtaBand
+        title="Be a part of our journey."
+        body="Your support today can change a child's tomorrow."
+        image={{
+          src: "/Assets/new images/group at Pillar rock .jpg",
+          alt: "CHES children and caregivers together on a memorable group outing",
+          position: "center 46%",
+        }}
+      />
     </>
   );
 }
@@ -125,9 +133,9 @@ function JourneyIntroSection() {
           <div className="relative col-span-3 aspect-[1.75] overflow-hidden rounded-xl">
             <Image src={journeyIntro.image} alt={journeyIntro.alt} fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
           </div>
-          <JourneyThumbnail src="/Assets/About/ches-children-meal.jpeg" alt="Children sharing a meal" />
-          <JourneyThumbnail src="/Assets/Galary/06367698-b922-469b-a84b-268e6e1edade.jpg" alt="Children holding toys" />
-          <JourneyThumbnail src="/Assets/Galary/PHOTO-2025-02-22-10-19-17.jpg" alt="Children and caregivers together" />
+          <JourneyThumbnail src="/Assets/new images/DSC_0383.JPG" alt="The illuminated CHES care home during an evening event" />
+          <JourneyThumbnail src="/Assets/new images/DSC_0421.JPG" alt="Guests arriving for a milestone event at CHES" />
+          <JourneyThumbnail src="/Assets/new images/DSC_0435.JPG" alt="Dr. Manorama meeting a visiting partner in the CHES library" />
         </div>
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--ches-orange)]">{journeyIntro.eyebrow}</p>

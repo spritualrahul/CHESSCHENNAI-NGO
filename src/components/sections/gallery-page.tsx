@@ -55,8 +55,12 @@ export function GalleryPageContent() {
     return galleryPhotos.filter((photo) => photo.category === activeFilter);
   }, [activeFilter]);
 
-  const visiblePhotos = showAll ? filteredPhotos : filteredPhotos.slice(0, initialVisibleCount);
-  const hasMore = filteredPhotos.length > initialVisibleCount && !showAll;
+  const wallPhotos = useMemo(
+    () => activeFilter === "All" ? filteredPhotos.filter((photo) => !photo.featured) : filteredPhotos,
+    [activeFilter, filteredPhotos],
+  );
+  const visiblePhotos = showAll ? wallPhotos : wallPhotos.slice(0, initialVisibleCount);
+  const hasMore = wallPhotos.length > initialVisibleCount && !showAll;
   const carouselPhotos = useMemo(() => {
     const featured = filteredPhotos.filter((photo) => photo.featured);
     return featured.length > 0 ? featured : filteredPhotos.slice(0, 6);
@@ -169,7 +173,7 @@ export function GalleryPageContent() {
             </div>
           </div>
 
-          {activeSlide ? (
+          {activeFilter === "All" && activeSlide ? (
             <div className="mt-8 grid gap-5 lg:grid-cols-[1.35fr_.65fr]">
               <motion.div
                 key={activeSlide.image}
@@ -232,19 +236,13 @@ export function GalleryPageContent() {
                   </span>
                 </div>
                 <div className="mt-4 grid grid-cols-3 gap-3 lg:grid-cols-2">
-                  {carouselPhotos.slice(0, 6).map((photo, index) => {
-                    const active = photo.image === activeSlide.image;
-
+                  {carouselPhotos.filter((photo) => photo.image !== activeSlide.image).slice(0, 6).map((photo) => {
                     return (
                       <button
                         key={photo.image}
                         type="button"
-                        onClick={() => setActiveSlideIndex(index)}
-                        className={`group relative aspect-[4/3] overflow-hidden rounded-lg border transition ${
-                          active
-                            ? "border-[var(--ches-orange)] shadow-[0_8px_20px_rgb(216_154_43/0.22)]"
-                            : "border-[#dfe8e3] hover:border-[var(--ches-orange)]"
-                        }`}
+                        onClick={() => setActiveSlideIndex(carouselPhotos.findIndex((item) => item.image === photo.image))}
+                        className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-[#dfe8e3] transition hover:-translate-y-0.5 hover:border-[var(--ches-orange)] hover:shadow-[0_8px_20px_rgb(216_154_43/0.18)]"
                       >
                         <Image
                           src={photo.image}
@@ -270,7 +268,7 @@ export function GalleryPageContent() {
               <h3 className="mt-1 font-heading text-3xl font-semibold text-[var(--ches-blue)]">Recent moments</h3>
             </div>
             <p className="text-sm font-medium text-[var(--ches-ink)]/70">
-              Showing {visiblePhotos.length} of {filteredPhotos.length} photos
+              Showing {visiblePhotos.length} of {wallPhotos.length} photos
             </p>
           </div>
 
@@ -283,7 +281,7 @@ export function GalleryPageContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-8% 0px" }}
                 transition={{ duration: 0.45, delay: Math.min(index * 0.025, 0.16) }}
-                className="group relative aspect-[4/3] overflow-hidden rounded-lg bg-[#e7ece7] shadow-[0_8px_22px_rgb(11_78_109/0.07)]"
+                className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#e7ece7] shadow-[0_8px_22px_rgb(11_78_109/0.07)] transition hover:-translate-y-1 hover:shadow-[0_18px_36px_rgb(11_78_109/0.14)]"
               >
                 <Image
                   src={photo.image}
@@ -292,18 +290,19 @@ export function GalleryPageContent() {
                   className="object-cover transition duration-700 group-hover:scale-105"
                   sizes="(min-width: 1024px) 24vw, (min-width: 640px) 48vw, 100vw"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(4,16,19,.54)_100%)] opacity-90" />
-                <div className="absolute inset-x-3 bottom-3">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_38%,rgba(4,16,19,.78)_100%)] opacity-90" />
+                <div className="absolute inset-x-4 bottom-4 text-white">
                   <span className="inline-flex max-w-full items-center gap-2 rounded-full bg-white/94 px-3 py-1.5 text-[0.68rem] font-extrabold text-[var(--ches-ink)] shadow-[0_8px_20px_rgb(0_0_0/0.14)] backdrop-blur">
                     <CategoryIcon category={photo.category} />
                     {photo.category}
                   </span>
+                  <h4 className="mt-2 font-heading text-xl font-semibold leading-tight drop-shadow-sm">{photo.title}</h4>
                 </div>
               </motion.article>
             ))}
           </motion.div>
 
-          {filteredPhotos.length === 0 ? (
+          {wallPhotos.length === 0 ? (
             <div className="mt-10 rounded-lg border border-[#d9e1df] bg-white py-12 text-center">
               <p className="font-heading text-2xl font-semibold text-[var(--ches-blue)]">No photos found.</p>
             </div>
@@ -319,7 +318,7 @@ export function GalleryPageContent() {
                 Show More Photos <ArrowDown className="size-4" />
               </button>
             </div>
-          ) : showAll && filteredPhotos.length > initialVisibleCount ? (
+          ) : showAll && wallPhotos.length > initialVisibleCount ? (
             <div className="mt-8 flex justify-center">
               <button
                 type="button"
@@ -337,8 +336,8 @@ export function GalleryPageContent() {
         <div className="mx-auto grid max-w-6xl overflow-hidden rounded-2xl border border-[#eadfca] bg-[#fff9ee] shadow-[0_18px_42px_rgb(11_78_109/0.08)] lg:grid-cols-[0.9fr_1.35fr_1.45fr]">
           <div className="relative min-h-64 lg:min-h-full">
             <Image
-              src="/Assets/About/ches-children-care.jpeg"
-              alt="A child supported by CHES smiling with hope"
+              src="/Assets/new images/DSC_0294.JPG"
+              alt="A young child receiving safe and compassionate care through CHES"
               fill
               className="object-cover"
               sizes="(min-width: 1024px) 28vw, 100vw"

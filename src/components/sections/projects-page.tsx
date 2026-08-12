@@ -52,8 +52,8 @@ export function ProjectsPageContent() {
     <>
       <section className="relative isolate min-h-[500px] overflow-hidden bg-[var(--ches-blue)] px-5 pt-24 text-white md:min-h-[560px] md:pt-28">
         <Image
-          src="/Assets/Galary/06367698-b922-469b-a84b-268e6e1edade.jpg"
-          alt="Children smiling together at a CHES home"
+          src="/Assets/new images/pongal 2021.JPG"
+          alt="CHES children smiling together during a Pongal celebration"
           fill
           priority
           className="object-cover object-center"
@@ -280,6 +280,11 @@ export function ProjectsPageContent() {
       <CtaBand
         title="Be a Part of Their Tomorrow"
         body="Your support helps us continue our mission of care, protection, education and empowerment."
+        image={{
+          src: "/Assets/new images/Community children Activity (3).jpeg",
+          alt: "Young people taking part in a CHES community support activity",
+          position: "center 42%",
+        }}
       />
     </>
   );

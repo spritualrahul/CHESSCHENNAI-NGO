@@ -68,6 +68,7 @@ export function HeroCarousel() {
                 priority={active === 0}
                 sizes="100vw"
                 className="object-cover"
+                style={{ objectPosition: slide.position }}
               />
             </motion.div>
           </motion.div>

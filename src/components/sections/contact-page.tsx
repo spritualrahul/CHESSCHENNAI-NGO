@@ -101,7 +101,7 @@ export function ContactPageContent() {
 
             <div className="bg-[#fffaf0] p-7 md:p-11">
               <div className="relative h-36 overflow-hidden rounded-xl bg-[#efe6d2]">
-                <Image src="/Assets/About/ches-children-care.jpeg" alt="Children receiving care and support through CHES" fill className="object-cover object-center" sizes="(min-width: 1024px) 40vw, 100vw" />
+                <Image src="/Assets/new images/DSCN3747.JPG" alt="Children enjoying an active group session at CHES" fill className="object-cover object-[center_42%]" sizes="(min-width: 1024px) 40vw, 100vw" />
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(77,57,31,.78),rgba(77,57,31,.06))]" />
                 <div className="absolute inset-x-5 bottom-4">
                   <p className="font-script text-3xl font-semibold text-white">Come and meet the work.</p>
@@ -157,7 +157,7 @@ export function ContactPageContent() {
       <section className="relative overflow-hidden border-y border-[#eadfce] bg-[#f8f0e2] px-5 py-0">
         <div className="mx-auto grid max-w-[1180px] items-center lg:grid-cols-[.8fr_1.05fr_1.2fr]">
           <div className="relative min-h-[290px] overflow-hidden lg:min-h-[305px]">
-            <Image src="/Assets/Galary/Seed balls planting (4).jpeg" alt="CHES children planting a seedling together" fill className="object-cover object-center" sizes="(min-width: 1024px) 30vw, 100vw" />
+            <Image src="/Assets/Galary/Seed balls planting (4).jpeg" alt="CHES children planting a seedling together" fill className="object-cover object-[center_58%]" sizes="(min-width: 1024px) 30vw, 100vw" />
           </div>
           <div className="py-9 lg:px-8">
             <h2 className="max-w-[330px] font-heading text-4xl font-semibold leading-[1.03] md:text-[2.55rem]">Your Kindness<br />Can Change a Life</h2>

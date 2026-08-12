@@ -17,7 +17,7 @@ import { DonationPaymentFlow } from "@/components/sections/donation-payment-flow
 import { donationDetails } from "@/data/site";
 
 const heroImage = "/Assets/donation-hero-watercolor.jpg";
-const donorImage = "/Assets/About/ches-children-meal.jpeg";
+const donorImage = "/Assets/new images/DSC_0346.JPG";
 const impactImage = "/Assets/Galary/Seed balls planting (2).jpeg";
 const upiPaymentUrl = `upi://pay?pa=${donationDetails.upiId}&pn=${encodeURIComponent("Community Health Education Society")}`;
 
@@ -150,7 +150,7 @@ export async function DonationForm() {
             <ol className="mt-5 grid gap-3">
               {taxSteps.map((step, index) => <li key={step} className="flex gap-3 text-xs leading-5 text-[#263b38]"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-[#d68d10] text-[0.68rem] font-bold text-white">{index + 1}</span><span>{step}</span></li>)}
             </ol>
-            <div className="relative mt-6 aspect-[1.7] overflow-hidden rounded-lg lg:absolute lg:bottom-0 lg:right-0 lg:mt-0 lg:h-full lg:w-[235px] lg:rounded-l-none"><Image src={donorImage} alt="Children receiving nourishment through CHES care" fill className="object-cover object-center" sizes="(min-width: 1024px) 235px, 100vw" /></div>
+            <div className="relative mt-6 aspect-[1.7] overflow-hidden rounded-lg lg:absolute lg:bottom-0 lg:right-0 lg:mt-0 lg:h-full lg:w-[235px] lg:rounded-l-none"><Image src={donorImage} alt="A smiling toddler receiving care through CHES" fill className="object-cover object-center" sizes="(min-width: 1024px) 235px, 100vw" /></div>
           </article>
         </div>
       </section>

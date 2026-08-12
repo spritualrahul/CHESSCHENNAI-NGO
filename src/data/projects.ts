@@ -178,8 +178,8 @@ export const chesProjects: ChesProject[] = [
       "The home-based care programme brought health support, counselling, treatment adherence and family guidance closer to people living with HIV/AIDS and their communities.",
     detailIntro:
       "Community Home-Based Care for PLHA brought support into people's homes, helping people living with HIV/AIDS and their families manage treatment, health needs, counselling and social isolation. The project made care more reachable for communities facing stigma and distance from services.",
-    image: "/Assets/Galary/06367698-b922-469b-a84b-268e6e1edade.jpg",
-    imageAlt: "Children and community members gathered at a CHES home",
+    image: "/Assets/Galary/IMG_6001.JPG",
+    imageAlt: "The CHES team providing practical support to women in the community",
     achievements: [
       "Home-based care for people living with HIV/AIDS",
       "Family counselling and treatment support",
@@ -236,8 +236,8 @@ export const chesProjects: ChesProject[] = [
       "Project Thooli helped children affected by HIV access pediatric antiretroviral treatment, follow-up care, nutrition guidance and the support needed to stay healthy and in school.",
     detailIntro:
       "Project Thooli supported children affected by HIV with pediatric ART access, treatment follow-up, nutrition guidance, education support and counselling. The project helped children remain healthy, supported and connected to learning.",
-    image: "/Assets/Galary/06367698-b922-469b-a84b-268e6e1edade.jpg",
-    imageAlt: "Children learning and growing through a CHES programme",
+    image: "/Assets/Galary/942a4e12-31ec-4dde-8ccf-ba72e103fabc.jpg",
+    imageAlt: "Children receiving hospital care and treatment support",
     achievements: [
       "Improved access to pediatric ART",
       "Health monitoring and adherence support",

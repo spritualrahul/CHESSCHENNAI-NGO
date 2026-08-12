@@ -19,6 +19,7 @@ import {
 export type StoryImage = {
   src: string;
   alt: string;
+  position?: string;
 };
 
 export type HeroSlide = StoryImage & {
@@ -27,26 +28,27 @@ export type HeroSlide = StoryImage & {
   body: string;
 };
 
-const gallery = "/Assets/Galary";
-
 export const homeHeroSlides: HeroSlide[] = [
   {
-    src: `${gallery}/06367698-b922-469b-a84b-268e6e1edade.jpg`,
-    alt: "Children holding soft toys together at a CHES home",
+    src: "/Assets/new images/47.jpg",
+    alt: "A joyful group of boys laughing together at CHES",
+    position: "center 42%",
     eyebrow: "Community Health Education Society",
     title: "Every Child Deserves Love, Protection and a Future",
     body: "For over three decades, CHES has been transforming lives with compassion, healthcare, education, and hope.",
   },
   {
-    src: `${gallery}/IMG_3127.jpeg`,
-    alt: "Children and caregivers gathered together at a CHES community event",
+    src: "/Assets/new images/476642_232386826859964_108349786_o.jpg",
+    alt: "Children holding hands against the evening sky",
+    position: "center 58%",
     eyebrow: "Kids deserve to be happy in family and community",
     title: "Every Child Deserves Love, Protection and a Future",
     body: "Together we create hope through healthcare, education, child protection, and compassion.",
   },
   {
-    src: `${gallery}/PHOTO-2025-02-22-10-19-17.jpg`,
-    alt: "Children and adults celebrating together at a CHES home",
+    src: "/Assets/Galary/IMG_3127.jpeg",
+    alt: "Children, young people and caregivers gathered at a CHES celebration",
+    position: "center 38%",
     eyebrow: "Hope grows in community",
     title: "Every Child Deserves Love, Protection and a Future",
     body: "Together we create hope through healthcare, education, child protection, and compassion.",
@@ -55,24 +57,24 @@ export const homeHeroSlides: HeroSlide[] = [
 
 export const storyImages = {
   welcome: {
-    src: `${gallery}/06367698-b922-469b-a84b-268e6e1edade.jpg`,
+    src: "/Assets/Galary/06367698-b922-469b-a84b-268e6e1edade.jpg",
     alt: "Children smiling together while holding soft toys at a CHES home",
   },
   origin: {
-    src: `${gallery}/06f856a4-d5a9-4180-8c91-d2f22af62ce9.jpg`,
+    src: "/Assets/Galary/06f856a4-d5a9-4180-8c91-d2f22af62ce9.jpg",
     alt: "Dr. Manorama Pinagapany caring for a child in an archival photograph",
   },
   community: {
-    src: `${gallery}/PHOTO-2025-02-22-10-19-17.jpg`,
-    alt: "Children and caregivers celebrating together in a bright community space",
+    src: "/Assets/new images/10916307_700553173376658_1878244781335180254_o.jpg",
+    alt: "Children and community members creating a colourful kolam together",
   },
   education: {
-    src: `${gallery}/Seed balls planting (4).jpeg`,
-    alt: "Children learning and participating together outdoors",
+    src: "/Assets/new images/DSC_0558.JPG",
+    alt: "Children concentrating on a classroom learning activity",
   },
   cta: {
-    src: `${gallery}/06367698-b922-469b-a84b-268e6e1edade.jpg`,
-    alt: "Children smiling together at a CHES home",
+    src: "/Assets/new images/DSC_0105.JPG",
+    alt: "Children enjoying an outdoor sports activity with CHES",
   },
 };
 
