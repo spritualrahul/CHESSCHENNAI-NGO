@@ -1,4 +1,4 @@
-import { ArrowRight, LockKeyhole, Mail, MapPin, Phone } from "lucide-react";
+import { LockKeyhole, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -98,22 +98,14 @@ export function FooterContent({ pathname }: { pathname: string }) {
             <p className="flex gap-2"><Phone className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.phone}</p>
             <p className="flex gap-2"><Mail className="mt-0.5 size-4 shrink-0 text-[var(--ches-blue)]" /> {site.email}</p>
           </div>
-          {!isContact ? <form onSubmit={(e) => e.preventDefault()} className="mt-5 flex overflow-hidden rounded-lg border border-[#dce5e2] bg-white p-1">
-            <label className="sr-only" htmlFor="newsletter-email">Email address</label>
-            <input id="newsletter-email" type="email" placeholder="Enter your email" className="min-w-0 flex-1 px-3 text-xs outline-none" />
-            <button type="submit" aria-label="Subscribe" className="grid size-8 place-items-center rounded-md bg-[var(--ches-blue)] text-white transition hover:bg-[var(--ches-orange)]"><ArrowRight className="size-4" /></button>
-          </form> : null}
+          {!isContact ? <p className="mt-5 text-xs leading-5 text-[var(--ches-muted)]">For programme updates or privacy questions, please email <a className="font-bold text-[var(--ches-blue)] underline underline-offset-2" href={`mailto:${site.email}`}>{site.email}</a>.</p> : null}
         </div>
 
         {isContact ? (
           <div>
             <h2 className="text-sm font-bold text-[var(--ches-blue)]">Stay Updated</h2>
-            <p className="mt-4 text-sm text-[var(--ches-muted)]">Subscribe to our newsletter</p>
-            <form onSubmit={(e) => e.preventDefault()} className="mt-4 flex overflow-hidden rounded-lg border border-[#dce5e2] bg-white p-1">
-              <label className="sr-only" htmlFor="contact-newsletter-email">Email address</label>
-              <input id="contact-newsletter-email" type="email" placeholder="Enter your email" className="min-w-0 flex-1 px-3 text-xs text-[#102433] outline-none" />
-              <button type="submit" aria-label="Subscribe" className="grid size-8 place-items-center rounded-md bg-[#e67a12] text-white transition hover:bg-[#f08c26]"><ArrowRight className="size-4" /></button>
-            </form>
+            <p className="mt-4 text-sm leading-6 text-[var(--ches-muted)]">For programme updates, partnerships or privacy questions, please email our team.</p>
+            <a href={`mailto:${site.email}`} className="mt-4 inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#e67a12] px-4 text-xs font-extrabold text-white transition hover:bg-[#f08c26]"><Mail className="size-4" /> {site.email}</a>
             <p className="mt-4 font-script text-2xl leading-none text-[var(--ches-green)]">Alone we can do so little;<br />together we can do so much.<br /><span className="text-base text-[var(--ches-muted)]">- Helen Keller</span></p>
           </div>
         ) : null}
@@ -121,7 +113,11 @@ export function FooterContent({ pathname }: { pathname: string }) {
       <div className="mx-auto flex max-w-6xl flex-col gap-2 pt-5 text-[0.68rem] text-[var(--ches-muted)] md:flex-row md:items-center md:justify-between">
         <p>© {new Date().getFullYear()} {site.fullName}. All Rights Reserved.</p>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <p>Privacy Policy | Terms of Use</p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <Link href="/privacy" className="transition hover:text-[var(--ches-orange)]">Privacy Notice</Link>
+            <span aria-hidden="true">|</span>
+            <Link href="/terms" className="transition hover:text-[var(--ches-orange)]">Terms of Use</Link>
+          </div>
           <Link href="/admin/login" className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[#dce7e1] bg-[#f7fbf8] px-3 text-[0.72rem] font-extrabold text-[var(--ches-green)] transition hover:border-[var(--ches-green)] hover:bg-[#eef7f0] hover:text-[var(--ches-blue)]">
             <LockKeyhole className="size-3.5" />
             Admin Login

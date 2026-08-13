@@ -30,13 +30,13 @@ Save the displayed password in a password manager. Only `AUTH_SECRET` and `ADMIN
 
 ## Database initialization
 
-The schema is in `database/migrations/001_create_donations.sql`. With `DATABASE_URL` available in the current shell and PostgreSQL `psql` installed, run:
+The schema is in `database/migrations/001_create_donations.sql`, the consent audit fields are added by `database/migrations/003_add_privacy_consent.sql`, and the retired visitor identifier table is removed by `database/migrations/004_retire_visitor_identifiers.sql`. With `DATABASE_URL` available in the current shell and PostgreSQL `psql` installed, run:
 
 ```bash
 npm run db:migrate
 ```
 
-The migration is idempotent and creates the `donations` table plus indexes for date, status and email. It can also be pasted into the Neon SQL Editor and executed once.
+The migrations are idempotent and create the `donations` table plus indexes for date, status and email. The latest migrations record the privacy notice version and consent timestamp for each online donor submission, and retire the old persistent visitor identifier store. They can also be pasted into the Neon SQL Editor and executed once.
 
 ## Local development
 
@@ -79,4 +79,6 @@ Do not put database or admin secrets in variables prefixed with `NEXT_PUBLIC_`.
 - Admin pages are server-authorized and marked `noindex`/`nofollow`.
 - PAN is absent from the donor list and shown in full only on an authenticated detail page.
 - Personal donor data should not be logged, exported, or shared outside authorised receipt, reconciliation and compliance work.
+- The public donation form requires affirmative acceptance of the Privacy Notice and records its version and consent timestamp.
+- Do not request Aadhaar or other identity documents by ordinary email; collect only the minimum information needed for the stated donation, tax and legal purposes.
 - Changing `PENDING` to `PAID` should only happen after manual reconciliation or a future verified payment webhook. The current form never claims that payment succeeded.

@@ -48,9 +48,9 @@ const internationalBankRows = [
 ] as const;
 
 const donorDocuments = [
-  "PAN card scanned copy or number",
-  "Aadhar Card scanned copy or number",
-  "Driving license scanned copy or number",
+  "PAN number, only when required for tax documentation",
+  "Payment reference or receipt, if you are requesting an acknowledgement",
+  "Do not email Aadhaar, driving-licence or other identity documents to CHES unless CHES has first confirmed a specific legal need and a secure submission method",
 ];
 
 const taxSteps = [

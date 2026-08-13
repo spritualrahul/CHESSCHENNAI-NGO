@@ -7,7 +7,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import { createDonationSchema } from "@/lib/donations/schema";
 
-type FieldErrors = Partial<Record<"name" | "pan" | "email" | "phone" | "address" | "amount", string[]>>;
+type FieldErrors = Partial<Record<"name" | "pan" | "email" | "phone" | "address" | "amount" | "privacyConsent", string[]>>;
 
 type DonationPaymentFlowProps = {
   panRequired: boolean;
@@ -77,6 +77,7 @@ export function DonationPaymentFlow({ panRequired, qrSource, upiId, upiPaymentUr
       phone: form.get("phone"),
       address: form.get("address"),
       amount: form.get("amount"),
+      privacyConsent: form.get("privacyConsent") === "on",
     };
     const parsed = createDonationSchema(panRequired).safeParse(candidate);
 
@@ -166,6 +167,14 @@ export function DonationPaymentFlow({ panRequired, qrSource, upiId, upiPaymentUr
                 <input className={`${fieldClassName} mt-0 pl-14`} id="amount" name="amount" type="number" inputMode="decimal" min="1" step="0.01" required placeholder="Enter amount" aria-invalid={Boolean(fieldErrors.amount)} aria-describedby={fieldErrors.amount ? "amount-error" : undefined} />
               </div>
             </FormField>
+
+            <div className="sm:col-span-2">
+              <label className="flex items-start gap-3 rounded-lg border border-[#dfe7df] bg-[#f8fbf8] p-3 text-xs leading-5 text-[#4f625c]">
+                <input className="mt-1 size-4 shrink-0 accent-[#27604c]" type="checkbox" name="privacyConsent" required aria-invalid={Boolean(fieldErrors.privacyConsent)} aria-describedby="privacy-consent-help" />
+                <span id="privacy-consent-help">I have read the <a className="font-extrabold text-[#27604c] underline underline-offset-2" href="/privacy" target="_blank" rel="noreferrer">Privacy Notice</a> and consent to CHES collecting and using these details to process my donation, issue records or receipts, meet applicable tax or legal obligations, and prevent duplicate submissions. I understand I can withdraw consent or request access, correction, or erasure by emailing <a className="font-extrabold text-[#27604c] underline underline-offset-2" href="mailto:admin@cheschennai.com">admin@cheschennai.com</a>.</span>
+              </label>
+              {fieldErrors.privacyConsent?.[0] ? <p className="mt-1.5 text-xs font-semibold text-[#a23b2d]">{fieldErrors.privacyConsent[0]}</p> : null}
+            </div>
           </fieldset>
 
           {formError ? <p role="alert" className="mt-5 rounded-lg border border-[#efc5bc] bg-[#fff5f2] px-4 py-3 text-sm font-semibold text-[#9d3729]">{formError}</p> : null}

@@ -3,6 +3,7 @@ import "server-only";
 import { neon } from "@neondatabase/serverless";
 import { randomBytes } from "node:crypto";
 
+import { site } from "@/data/site";
 import type { DonationInput, DonationStatus } from "@/lib/donations/schema";
 
 export type DonationListItem = {
@@ -141,6 +142,8 @@ export async function insertDonation(input: DonationInput, idempotencyKey: strin
           phone,
           address,
           amount,
+          privacy_notice_version,
+          consent_at,
           payment_status
         ) VALUES (
           ${donationId},
@@ -151,6 +154,8 @@ export async function insertDonation(input: DonationInput, idempotencyKey: strin
           ${input.phone},
           ${input.address},
           ${input.amount},
+          ${site.privacyNoticeVersion},
+          NOW(),
           'PENDING'
         )
         ON CONFLICT (idempotency_key)

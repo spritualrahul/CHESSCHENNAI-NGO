@@ -57,6 +57,7 @@ export function createDonationSchema(panRequired: boolean) {
         .transform(Number)
         .refine((value) => value > 0, "Donation amount must be greater than zero.")
         .refine((value) => value <= 99_999_999.99, "Donation amount is too large."),
+      privacyConsent: z.boolean().refine((value) => value, "Please read and accept the Privacy Notice."),
     })
     .superRefine((value, context) => {
       if (panRequired && !value.pan) {

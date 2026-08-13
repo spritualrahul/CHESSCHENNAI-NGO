@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { Caveat, Inter, Playfair_Display } from "next/font/google";
 import Script from "next/script";
 import { FooterShell } from "@/components/layout/footer-shell";
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "NGO",
