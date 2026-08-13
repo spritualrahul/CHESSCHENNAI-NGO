@@ -132,7 +132,7 @@ export async function DonationForm() {
               <BankDetailsCard title="CHES Banking Details" subtitle="for International / Overseas Fund Transfer" rows={internationalBankRows} tone="gold" />
             </div>
           </div>
-          <p className="mt-4 flex items-start gap-2 rounded-lg bg-[#edf5ef] px-4 py-3 text-xs leading-5 text-[#1c453f]"><Mail className="mt-0.5 size-4 shrink-0 text-[#d68d10]" /><span>Kindly share the payment receipt with <a className="font-extrabold underline underline-offset-2" href="mailto:ches_cheschennai@yahoo.co.in">ches_cheschennai@yahoo.co.in</a> or <a className="font-extrabold underline underline-offset-2" href="mailto:pmanorama54@gmail.com">pmanorama54@gmail.com</a> for acknowledgement.</span></p>
+          <p className="mt-4 flex items-start gap-2 rounded-lg bg-[#edf5ef] px-4 py-3 text-xs leading-5 text-[#1c453f]"><Mail className="mt-0.5 size-4 shrink-0 text-[#d68d10]" /><span>Kindly share the payment receipt with <a className="font-extrabold underline underline-offset-2" href="mailto:admin@cheschennai.com">admin@cheschennai.com</a> for acknowledgement.</span></p>
         </div>
       </section>
 

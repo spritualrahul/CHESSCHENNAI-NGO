@@ -80,7 +80,7 @@ export function ContactPageContent() {
 
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                   <ContactAction icon={Phone} label="Call CHES" href="tel:04424726655" value="044 - 24726655" onActivate={() => setActiveContact("phone")} active={activeContact === "phone"} />
-                  <ContactAction icon={Mail} label="Email CHES" href="mailto:ches_cheschennai@yahoo.co.in" value="ches_cheschennai@yahoo.co.in" onActivate={() => setActiveContact("email")} active={activeContact === "email"} />
+                  <ContactAction icon={Mail} label="Email CHES" href="mailto:admin@cheschennai.com" value="admin@cheschennai.com" onActivate={() => setActiveContact("email")} active={activeContact === "email"} />
                 </div>
                 <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#5f5245]">
                   <span className="font-extrabold uppercase tracking-[0.12em] text-[#c87517]">Other office lines</span>
@@ -93,7 +93,7 @@ export function ContactPageContent() {
                   <p className="mt-2 text-sm font-bold text-[#2f261b]">MD; DCH; DM(Gastro)</p>
                   <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-[#4b4033]/78">
                     <a href="tel:+919444077177" className="font-semibold transition hover:text-[#c87517]">+91 - 9444077177</a>
-                    <a href="mailto:pmanorama54@gmail.com" className="font-semibold transition hover:text-[#c87517]">pmanorama54@gmail.com</a>
+                    <a href="mailto:admin@cheschennai.com" className="font-semibold transition hover:text-[#c87517]">admin@cheschennai.com</a>
                   </div>
                 </div>
               </div>

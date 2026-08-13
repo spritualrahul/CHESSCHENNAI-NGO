@@ -8,7 +8,7 @@ export const site = {
   fullName: "Community Health Education Society",
   tagline: "Health, education and hope for vulnerable children.",
   url: "https://cheschennai.org",
-  email: "ches_cheschennai@yahoo.co.in / pmanorama54@gmail.com",
+  email: "admin@cheschennai.com",
   phone: "044 - 24726655 / 044 - 24731283 / 9940033249",
   address: "Sakthi Illam, 21/8, 5th Cross Street, United India Colony, Kodambakkam, Chennai - 600 024",
   addressLines: [
