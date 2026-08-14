@@ -4,7 +4,7 @@ This checklist supports the website implementation. It is an operational control
 
 ## Before production
 
-- Apply migrations `001` through `004` to the production database. Migration `003` adds the notice version and consent timestamp to new donation records. Migration `004` retires the old persistent visitor identifier table after the visitor counter was removed.
+- Apply migrations `001` through `006` to the production database. Migration `003` adds the notice version and consent timestamp to new donation records. Migration `004` retires the old persistent visitor identifier table. Migration `005` records the previous aggregate counter schema. Migration `006` creates the anonymous unique homepage visitor table.
 - Confirm that `admin@cheschennai.com` is monitored by an authorised CHES privacy contact and can receive rights requests and breach questions.
 - Maintain a current list of vendors that can access website or donor data, including hosting, database, payment and professional service providers. Record each vendor's purpose, access, security commitments and any transfer outside India.
 - Keep administrator access limited to named personnel. Review access at least every six months and immediately when someone leaves or changes role.
@@ -29,5 +29,5 @@ This checklist supports the website implementation. It is an operational control
 ## Ongoing review
 
 - Review the public [Privacy Notice](/privacy) and [Terms of Use](/terms) whenever the site adds analytics, a newsletter, contact form, payment processor, volunteer application, child-facing service, or new personal-data field.
-- Do not add tracking, advertising, newsletter or third-party form tools without updating the notice, consent design, vendor register, retention plan and security review.
+- Do not add tracking, advertising, newsletter or third-party form tools without updating the notice, consent design, vendor register, retention plan and security review. The current homepage counter must remain limited to one random first-party HttpOnly visitor token per browser/device, with no IP storage, user-agent storage, local storage, advertising or profiling.
 - Review the final DPDP Act, Rules, notifications and Board guidance when they change. The website provides a contact route for internal grievances; users may escalate through the official Data Protection Board information published by MeitY.

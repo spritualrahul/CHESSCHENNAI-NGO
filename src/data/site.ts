@@ -9,8 +9,8 @@ export const site = {
   tagline: "Health, education and hope for vulnerable children.",
   url: "https://cheschennai.org",
   email: "admin@cheschennai.com",
-  privacyNoticeVersion: "2026-08-13",
-  privacyEffectiveDate: "13 August 2026",
+  privacyNoticeVersion: "2026-08-14",
+  privacyEffectiveDate: "14 August 2026",
   phone: "044 - 24726655 / 044 - 24731283 / 9940033249",
   address: "Sakthi Illam, 21/8, 5th Cross Street, United India Colony, Kodambakkam, Chennai - 600 024",
   addressLines: [
