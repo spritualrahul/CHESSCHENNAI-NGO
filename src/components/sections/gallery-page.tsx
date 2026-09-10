@@ -42,7 +42,7 @@ const trustItems = [
 ];
 
 const initialVisibleCount = 8;
-const galleryHeroVideo = "/Assets/video/make_this_as_a_video___motion_gwr_video_mvp.mp4";
+const galleryHeroVideo = "/Assets/video/ches-gallery-hero.mp4";
 
 export function GalleryPageContent() {
   const [activeFilter, setActiveFilter] = useState<GalleryCategory>("All");
@@ -96,8 +96,9 @@ export function GalleryPageContent() {
             autoPlay
             playsInline
             muted
-            controls
+            preload="auto"
             onEnded={() => setIsVideoPlaying(false)}
+            onError={() => setIsVideoPlaying(false)}
           />
         ) : null}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,18,20,.94)_0%,rgba(9,18,20,.76)_36%,rgba(9,18,20,.18)_72%,rgba(9,18,20,.08)_100%)]" />
@@ -123,16 +124,18 @@ export function GalleryPageContent() {
               <Link href="/donate" className="primary-cta h-12 px-7">
                 Donate Now <Heart className="size-4 fill-current" />
               </Link>
-              <button
-                type="button"
-                onClick={() => setIsVideoPlaying(true)}
-                className="inline-flex h-12 items-center gap-3 rounded-full px-1 pr-4 text-sm font-semibold text-white transition hover:text-[var(--ches-gold)]"
-              >
-                <span className="grid size-10 place-items-center rounded-full border border-[var(--ches-gold)] bg-black/15 text-[var(--ches-gold)]">
-                  <Play className="ml-0.5 size-4 fill-current" />
-                </span>
-                {isVideoPlaying ? "Playing Video" : "Play Video"}
-              </button>
+              {!isVideoPlaying ? (
+                <button
+                  type="button"
+                  onClick={() => setIsVideoPlaying(true)}
+                  className="inline-flex h-12 items-center gap-3 rounded-full px-1 pr-4 text-sm font-semibold text-white transition hover:text-[var(--ches-gold)]"
+                >
+                  <span className="grid size-10 place-items-center rounded-full border border-[var(--ches-gold)] bg-black/15 text-[var(--ches-gold)]">
+                    <Play className="ml-0.5 size-4 fill-current" />
+                  </span>
+                  Play Video
+                </button>
+              ) : null}
             </div>
           </motion.div>
         </div>
