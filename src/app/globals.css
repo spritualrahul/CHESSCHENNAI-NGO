@@ -97,7 +97,15 @@
 
 @layer components {
   .primary-cta {
-    @apply inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[var(--ches-orange)] px-6 text-sm font-bold text-white shadow-md shadow-[#b3781d]/20 transition hover:-translate-y-0.5 hover:bg-[#c98920];
+    @apply inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[var(--ches-orange)] px-6 text-sm font-bold text-white shadow-md shadow-[#b3781d]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c98920] hover:shadow-lg hover:shadow-[#b3781d]/25 active:translate-y-0 active:scale-[0.98];
+  }
+
+  .primary-cta svg {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .primary-cta:hover svg {
+    transform: translateX(2px);
   }
 
   .eyebrow {
@@ -105,7 +113,7 @@
   }
 
   .secondary-cta {
-    @apply inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-white/70 bg-transparent px-6 text-sm font-bold text-white transition hover:bg-white/10;
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-lg border border-white/70 bg-transparent px-6 text-sm font-bold text-white transition-all duration-300 hover:bg-white/10 active:scale-[0.98];
   }
 
   .section-shell {

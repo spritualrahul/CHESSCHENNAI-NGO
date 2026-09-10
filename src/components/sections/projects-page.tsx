@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -17,9 +18,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import { Counter } from "@/components/shared/counter";
 import { CtaBand } from "@/components/shared/cta-band";
-import { AnimatedSection } from "@/components/shared/animated-section";
+import { RevealSection } from "@/components/shared/scroll-reveal";
+import { StaggerContainer, StaggerItem } from "@/components/shared/scroll-reveal";
 import { chesProjects, projectStats, type ProjectStatus } from "@/data/projects";
+import { duration, ease, stagger, viewportMargin } from "@/lib/motion-tokens";
 
 const statIcons = [UsersRound, GraduationCap, MapPinned, Trophy];
 
@@ -33,6 +37,7 @@ export function ProjectsPageContent() {
   const [filter, setFilter] = useState<"all" | ProjectStatus>("all");
   const [query, setQuery] = useState("");
   const [openProjectNumber, setOpenProjectNumber] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const visibleProjects = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -61,42 +66,83 @@ export function ProjectsPageContent() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,25,30,.94)_0%,rgba(8,25,30,.78)_31%,rgba(8,25,30,.28)_69%,rgba(8,25,30,.18)_100%)]" />
         <div className="relative mx-auto flex min-h-[390px] max-w-7xl items-center pb-20 md:min-h-[430px]">
-          <div className="max-w-2xl">
-            <p className="eyebrow text-[var(--ches-orange)]">Our Projects</p>
-            <h1 className="mt-5 max-w-3xl font-heading text-5xl font-semibold leading-[0.98] md:text-7xl">
+          <motion.div
+            className="max-w-2xl"
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: stagger.medium, delayChildren: 0.2 } },
+            }}
+          >
+            <motion.p
+              className="eyebrow text-[var(--ches-orange)]"
+              variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: duration.medium, ease: ease.out }}
+            >
+              Our Projects
+            </motion.p>
+            <motion.h1
+              className="mt-5 max-w-3xl font-heading text-5xl font-semibold leading-[0.98] md:text-7xl"
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: duration.slow, ease: ease.smooth }}
+            >
               Creating Change.
               <br />
               Transforming Lives.
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-7 text-white/85 md:text-lg">
+            </motion.h1>
+            <motion.p
+              className="mt-6 max-w-xl text-base leading-7 text-white/85 md:text-lg"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: duration.medium, ease: ease.out }}
+            >
               Every project at CHES is designed with compassion, innovation and a deep commitment to ensure every child, woman and community we work with can live with dignity, safety and opportunity.
-            </p>
-            <Link href="#projects" className="primary-cta mt-8">
-              Make a Difference <ArrowRight className="size-4" />
-            </Link>
-          </div>
+            </motion.p>
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: duration.medium, ease: ease.out }}
+            >
+              <Link href="#projects" className="primary-cta mt-8">
+                Make a Difference <ArrowRight className="size-4" />
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       <section className="relative z-10 -mt-10 px-5 md:-mt-14" aria-label="CHES project impact">
-        <div className="mx-auto grid max-w-6xl overflow-hidden rounded-2xl border border-[#d7e4e6] bg-white/95 shadow-[0_18px_40px_rgb(11_78_109/0.12)] backdrop-blur md:grid-cols-4">
+        <StaggerContainer
+          className="mx-auto grid max-w-6xl overflow-hidden rounded-2xl border border-[#d7e4e6] bg-white/95 shadow-[0_18px_40px_rgb(11_78_109/0.12)] backdrop-blur md:grid-cols-4"
+          stagger={stagger.medium}
+          margin="-5% 0px"
+        >
           {projectStats.map((stat, index) => {
             const Icon = statIcons[index];
+            const numericValue = parseInt(stat.value.replace(/[^0-9]/g, ""), 10);
+            const hasNumeric = !isNaN(numericValue) && numericValue > 1;
 
             return (
-              <div key={stat.label} className="flex min-h-24 items-center gap-4 border-b border-[#dce5e7] px-6 py-5 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
-                <Icon className="size-9 shrink-0 text-[var(--ches-blue)]" strokeWidth={1.6} />
-                <div>
-                  <p className="font-heading text-2xl font-semibold leading-none text-[var(--ches-blue)]">{stat.value}</p>
-                  <p className="mt-2 text-xs font-semibold text-[var(--ches-charcoal)]/70">{stat.label}</p>
+              <StaggerItem key={stat.label} variant="fadeUpSmall">
+                <div className="flex min-h-24 items-center gap-4 border-b border-[#dce5e7] px-6 py-5 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
+                  <Icon className="size-9 shrink-0 text-[var(--ches-blue)]" strokeWidth={1.6} />
+                  <div>
+                    <p className="font-heading text-2xl font-semibold leading-none text-[var(--ches-blue)]">
+                      {hasNumeric ? (
+                        <Counter value={numericValue} suffix={stat.value.replace(/[0-9]/g, "")} duration={2} />
+                      ) : (
+                        stat.value
+                      )}
+                    </p>
+                    <p className="mt-2 text-xs font-semibold text-[var(--ches-charcoal)]/70">{stat.label}</p>
+                  </div>
                 </div>
-              </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </section>
 
-      <AnimatedSection id="projects" className="px-5 py-14 md:py-20">
+      <RevealSection id="projects" className="px-5 py-14 md:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap gap-3" role="tablist" aria-label="Filter projects">
@@ -144,13 +190,17 @@ export function ProjectsPageContent() {
           </div>
 
           <div className="mt-8 space-y-4">
-            {visibleProjects.map((project) => {
+            {visibleProjects.map((project, index) => {
               const detailsOpen = openProjectNumber === project.number;
 
               return (
-              <article
+              <motion.article
                 key={project.number}
                 className="group overflow-hidden rounded-2xl border border-[#e2e6e2] bg-white shadow-[0_8px_24px_rgb(11_78_109/0.04)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgb(11_78_109/0.10)]"
+                initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: viewportMargin.default }}
+                transition={{ duration: duration.medium, ease: ease.out, delay: Math.min(index * 0.08, 0.32) }}
               >
                 <div className="grid lg:grid-cols-[29%_46%_25%]">
                   <div className="relative min-h-64 overflow-hidden lg:min-h-[255px]">
@@ -258,7 +308,7 @@ export function ProjectsPageContent() {
                     </div>
                   </div>
                 </div>
-              </article>
+              </motion.article>
               );
             })}
           </div>
@@ -275,7 +325,7 @@ export function ProjectsPageContent() {
             Showing {visibleProjects.length} {visibleProjects.length === 1 ? "project" : "projects"}
           </p>
         </div>
-      </AnimatedSection>
+      </RevealSection>
 
       <CtaBand
         title="Be a Part of Their Tomorrow"

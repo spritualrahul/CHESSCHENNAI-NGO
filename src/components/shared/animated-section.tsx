@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { FadeIn } from "@/components/shared/fade-in";
+import { RevealSection } from "@/components/shared/scroll-reveal";
 import type { ReactNode } from "react";
 
 type AnimatedSectionProps = {
@@ -11,14 +11,13 @@ type AnimatedSectionProps = {
 };
 
 /**
- * Backwards-compatible AnimatedSection using the lightweight FadeIn component.
- * Drop-in replacement for the old framer-motion version.
+ * Backwards-compatible AnimatedSection using the new RevealSection component.
+ * Drop-in replacement that now uses Framer Motion whileInView.
  */
 export function AnimatedSection({ className, children, id, ...props }: AnimatedSectionProps) {
   return (
-    <FadeIn as="section" className={cn("section-shell", className)}>
-      {id ? <span id={id} className="absolute -mt-24" /> : null}
+    <RevealSection className={className} id={id}>
       {children}
-    </FadeIn>
+    </RevealSection>
   );
 }

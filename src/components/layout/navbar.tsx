@@ -1,25 +1,56 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Heart, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { navItems, site } from "@/data/site";
+import { duration, ease, stagger } from "@/lib/motion-tokens";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const donateHref = pathname === "/donate" ? "#donate-payment" : "/donate";
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 32);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 bg-white shadow-[0_2px_18px_rgb(15_23_42/0.08)]"
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-all",
+        prefersReducedMotion ? "" : "duration-500 ease-out",
+        scrolled
+          ? "bg-white/95 shadow-[0_2px_18px_rgb(15_23_42/0.08)] backdrop-blur-md"
+          : "bg-white shadow-[0_2px_18px_rgb(15_23_42/0.08)]",
+      )}
     >
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5" aria-label="Primary">
+      <nav
+        className={cn(
+          "mx-auto flex max-w-7xl items-center justify-between px-5 transition-[height]",
+          prefersReducedMotion ? "" : "duration-500 ease-out",
+          scrolled ? "h-16" : "h-20",
+        )}
+        aria-label="Primary"
+      >
         <Link href="/" className="flex items-center" aria-label="CHES home">
           <span className="flex items-center gap-2.5">
             <span className="relative grid size-10 overflow-hidden rounded-full border border-[var(--ches-blue)]/10 bg-white">
@@ -41,12 +72,18 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative py-2 text-sm font-medium transition hover:text-[var(--ches-orange)]",
+                  "nav-link relative py-2 text-sm font-medium transition hover:text-[var(--ches-orange)]",
                   active ? "text-[var(--ches-orange)]" : "text-[var(--ches-ink)]/78",
                 )}
               >
                 {item.label}
-                {active ? <span className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-[var(--ches-orange)]" /> : null}
+                {active ? (
+                  <motion.span
+                    layoutId="nav-active-indicator"
+                    className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-[var(--ches-orange)]"
+                    transition={{ type: "spring", bounce: 0.18, duration: 0.5 }}
+                  />
+                ) : null}
               </Link>
             );
           })}
@@ -75,30 +112,53 @@ export function Navbar() {
       <AnimatePresence>
         {open ? (
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.22 }}
-            className="border-t border-[var(--ches-blue)]/10 bg-white px-5 pb-6 lg:hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: ease.out }}
+            className="overflow-hidden border-t border-[var(--ches-blue)]/10 bg-white lg:hidden"
           >
-            <div className="mx-auto grid max-w-7xl gap-2 py-4">
+            <motion.div
+              className="mx-auto grid max-w-7xl gap-2 px-5 py-4"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: stagger.fast,
+                    delayChildren: 0.08,
+                  },
+                },
+              }}
+            >
               {navItems.map((item) => (
-                <Link
+                <motion.div
                   key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "rounded-lg px-4 py-3 font-heading text-xl font-bold transition hover:bg-[#f2f8f8]",
-                    pathname === item.href ? "text-[var(--ches-orange)]" : "text-[var(--ches-blue)]",
-                  )}
+                  variants={{
+                    hidden: { opacity: 0, x: -16 },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                  transition={{ duration: duration.fast, ease: ease.out }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "rounded-lg px-4 py-3 font-heading text-xl font-bold transition hover:bg-[#f2f8f8]",
+                      pathname === item.href ? "text-[var(--ches-orange)]" : "text-[var(--ches-blue)]",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
+            </motion.div>
+            <div className="px-5 pb-6">
+              <Link href={donateHref} onClick={() => setOpen(false)} className="primary-cta w-full">
+                Donate Now <Heart className="size-4 fill-current" />
+              </Link>
             </div>
-            <Link href={donateHref} onClick={() => setOpen(false)} className="primary-cta w-full">
-              Donate Now <Heart className="size-4 fill-current" />
-            </Link>
           </motion.div>
         ) : null}
       </AnimatePresence>

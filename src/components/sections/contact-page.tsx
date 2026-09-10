@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
@@ -19,7 +19,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/shared/scroll-reveal";
 import { site } from "@/data/site";
+import { duration, ease, stagger } from "@/lib/motion-tokens";
 
 const trustItems = [
   { icon: ShieldCheck, title: "Give with confidence", body: "Your support is handled with care and transparency." },
@@ -35,6 +37,7 @@ const donorAssurances = [
 
 export function ContactPageContent() {
   const [activeContact, setActiveContact] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <div className="contact-page overflow-hidden bg-[#fffdf8] text-[#2f261b]">
@@ -49,26 +52,54 @@ export function ContactPageContent() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(242,249,252,.98)_0%,rgba(242,249,252,.94)_34%,rgba(242,249,252,.58)_66%,rgba(242,249,252,.1)_100%)]" />
         <div className="relative mx-auto flex min-h-[590px] max-w-7xl items-center px-5 py-16">
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }} className="max-w-[600px]">
-            <div className="mb-4 flex items-center gap-3 text-[var(--ches-orange)]">
+          <motion.div
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: stagger.medium, delayChildren: 0.15 } },
+            }}
+            className="max-w-[600px]"
+          >
+            <motion.div
+              className="mb-4 flex items-center gap-3 text-[var(--ches-orange)]"
+              variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: duration.medium, ease: ease.out }}
+            >
               <Heart className="size-7 rotate-[-12deg]" />
               <p className="font-script text-3xl font-semibold">We&apos;re here for you</p>
-            </div>
-            <h1 className="font-heading text-5xl font-semibold leading-[.98] md:text-[4.6rem]">Let&apos;s Connect<br />&amp; Create Change</h1>
-            <p className="mt-6 max-w-[440px] text-base leading-7 text-[#463d31]/82 md:text-lg">Whether you want to collaborate, volunteer, donate or learn more about our work, we would love to hear from you.</p>
-            <div className="mt-7 flex flex-wrap items-center gap-4">
+            </motion.div>
+            <motion.h1
+              className="font-heading text-5xl font-semibold leading-[.98] md:text-[4.6rem]"
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: duration.slow, ease: ease.smooth }}
+            >
+              Let&apos;s Connect<br />&amp; Create Change
+            </motion.h1>
+            <motion.p
+              className="mt-6 max-w-[440px] text-base leading-7 text-[#463d31]/82 md:text-lg"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: duration.medium, ease: ease.out }}
+            >
+              Whether you want to collaborate, volunteer, donate or learn more about our work, we would love to hear from you.
+            </motion.p>
+            <motion.div
+              className="mt-7 flex flex-wrap items-center gap-4"
+              variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: duration.medium, ease: ease.out }}
+            >
               <Link href="/donate" className="primary-cta h-12 px-6">Donate Now <Heart className="size-4 fill-current" /></Link>
               <Link href="/projects" className="inline-flex h-12 items-center gap-3 rounded-full px-3 text-sm font-bold text-[#4a3a26] transition hover:text-[var(--ches-orange)]">
                 <span className="grid size-9 place-items-center rounded-full border border-[var(--ches-orange)] text-[var(--ches-orange)]"><Sparkles className="size-4" /></span>
                 See Our Impact
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
       <section className="relative z-10 mx-auto -mt-12 max-w-[1180px] px-5 pb-14 md:-mt-16 md:pb-20">
-        <div className="overflow-hidden rounded-[1.5rem] border border-[#eadfcb] bg-white shadow-[0_22px_60px_rgb(94_67_34/0.10)]">
+        <ScrollReveal variant="fadeUpSmall" className="overflow-hidden rounded-[1.5rem] border border-[#eadfcb] bg-white shadow-[0_22px_60px_rgb(94_67_34/0.10)]">
           <div className="grid lg:grid-cols-[1.05fr_.95fr]">
             <div className="relative overflow-hidden bg-[var(--ches-sky)] p-7 text-[#2f261b] md:p-11">
               <div className="absolute -right-20 -top-24 size-64 rounded-full border border-[#d89a2b]/20" />
@@ -143,15 +174,17 @@ export function ContactPageContent() {
             </div>
           </div>
 
-          <div className="grid border-t border-[#eadfcb] bg-[#fff8ec] sm:grid-cols-3">
+          <StaggerContainer as="div" className="grid border-t border-[#eadfcb] bg-[#fff8ec] sm:grid-cols-3" stagger={stagger.fast}>
             {donorAssurances.map((item) => (
-              <div key={item.title} className="flex gap-3 border-b border-[#eadfcb] p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 md:p-7">
+              <StaggerItem key={item.title} variant="fadeUpSmall">
+              <div className="flex gap-3 border-b border-[#eadfcb] p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 md:p-7">
                 <item.icon className="mt-0.5 size-7 shrink-0 text-[#e58218]" />
                 <div><h3 className="text-sm font-extrabold text-[#3c3020]">{item.title}</h3><p className="mt-1 text-xs leading-5 text-[#4b4033]/68">{item.body}</p></div>
               </div>
+              </StaggerItem>
             ))}
-          </div>
-        </div>
+          </StaggerContainer>
+        </ScrollReveal>
       </section>
 
       <section className="relative overflow-hidden border-y border-[#eadfce] bg-[#f8f0e2] px-5 py-0">
