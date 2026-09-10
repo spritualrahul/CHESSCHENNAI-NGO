@@ -42,7 +42,7 @@ const trustItems = [
 ];
 
 const initialVisibleCount = 8;
-const galleryHeroVideo = "/Assets/video/make_this_as_a_video___motion.mp4";
+const galleryHeroVideo = "/Assets/video/make_this_as_a_video___motion_gwr_video_mvp.mp4";
 
 export function GalleryPageContent() {
   const [activeFilter, setActiveFilter] = useState<GalleryCategory>("All");
